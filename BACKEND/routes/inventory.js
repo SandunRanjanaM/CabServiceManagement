@@ -24,6 +24,19 @@ router.get("/list", async (req, res) => {
     }
 });
 
+// Route to get details of a single inventory item by ID
+router.get("/:id", async (req, res) => {
+    try {
+        const inventoryItem = await InventoryItem.findById(req.params.id);
+        if (!inventoryItem) {
+            return res.status(404).json({ message: 'Inventory item not found' });
+        }
+        res.json(inventoryItem);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Route to update an inventory item by ID
 router.put("/:id", async (req, res) => {
     try {
