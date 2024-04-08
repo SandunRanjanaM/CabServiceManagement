@@ -18,7 +18,7 @@ mongoose.connect(URL, {
 
     //useCreateIndex: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
     //useFindAndModify: false
 });
 
@@ -28,6 +28,10 @@ connection.once("open", () => {
 
     console.log("Mongodb Connection Success!");
 })
+
+const paymentdetailsRouter = require("./routes/paymentdetails");
+
+app.use("/paymentdetails",paymentdetailsRouter);
 
 app.listen(PORT, () => {
 
