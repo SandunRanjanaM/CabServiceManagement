@@ -33,16 +33,16 @@ router.route("/add").post(upload.single('content'), (req, res) => {
 
     const title = req.body.title;
     const description = req.body.description;
-    const content = req.body.content;
+    const content = req.file;
 
     const newAdvertisement = new Advertisement({
 
         title,
         description,
-        content : {
+        content: {
 
-            data : Buffer.from(content, 'base64'),
-            contentType : 'content/png'
+            data: Buffer.from(fs.readFileSync(content.path)),
+            contentType: content.mimetype
         }
     })
 
@@ -75,10 +75,10 @@ router.route("/update/:id").put(async (req, res) => {
 
         title,
         description,
-        content : {
+        content: {
 
-            data : Buffer.from(content, 'base64'),
-            contentType : 'content/png'
+            data: Buffer.from(fs.readFileSync(content.path)),
+            contentType: content.mimetype
         }
     }
 
