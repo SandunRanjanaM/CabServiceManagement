@@ -8,6 +8,7 @@ require("dotenv").config();
 const multer = require("multer");
 //import file system.
 const fs = require('fs');
+const path = require("path");
 
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
@@ -59,9 +60,11 @@ connection.once("open", () => {
     console.log("Mongodb Connection Success!");
 })
 
-const advertisementRouter = require("./routes/advertisements.js");
-
+const advertisementRouter = require("./routes/advertisements.js")(upload); // Pass upload to advertisements router
 app.use("/advertisement", advertisementRouter);
+
+// Serve uploaded images statically
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(PORT, () => {
 
