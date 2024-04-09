@@ -19,7 +19,7 @@ const advertisementSchema = new Schema ({
     content : {
 
         data : Buffer,
-        contentType : [String]
+        contentType : String
     }
 })
 
