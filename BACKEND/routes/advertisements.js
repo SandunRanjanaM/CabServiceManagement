@@ -29,32 +29,26 @@ const upload = multer({
 })
 
 
-router.route("/add").post(upload.single('content'), (req, res) => {
+module.exports = function(upload) { // Accept upload middleware as parameter
+    router.route("/add").post(upload.array('content', 5), (req, res) => { // Accept multiple images with a limit of 5
+        const { title, description } = req.body;
+        const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
 
-    const title = req.body.title;
-    const description = req.body.description;
-    const content = req.file;
+        const newAdvertisement = new Advertisement({
+            title,
+            description,
+            content: contentPaths // Save array of paths of uploaded images to content field
+        });
 
-    const newAdvertisement = new Advertisement({
+        newAdvertisement.save().then(() => {
+            res.json("Advertisement Added");
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).send({ status: "Error with adding advertisement", error: err.message });
+        });
+    });
 
-        title,
-        description,
-        content: {
-
-            data: Buffer.from(fs.readFileSync(content.path)),
-            contentType: content.mimetype
-        }
-    })
-
-    newAdvertisement.save().then(() => {
-
-        res.json("Advertisement Added")
-    }).catch((err) => {
-
-        console.log(err);
-    })
-})
-
+   
 router.route("/").get((req, res) => {
 
     Advertisement.find().then((advertisements) => {
@@ -66,31 +60,29 @@ router.route("/").get((req, res) => {
     })
 })
 
-router.route("/update/:id").put(async (req, res) => {
+// Route for updating advertisements
+router.route("/update/:id").put(upload.array('content', 5), async (req, res) => {
+    const adId = req.params.id;
+    const { title, description } = req.body;
+    const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
 
-    let adId = req.params.id;
-    const {title, description, content} = req.body;
-
+    // Create an object with updated advertisement data
     const updateAdvertisement = {
-
         title,
         description,
-        content: {
+        content: contentPaths // Save array of paths of uploaded images to content field
+    };
 
-            data: Buffer.from(fs.readFileSync(content.path)),
-            contentType: content.mimetype
-        }
-    }
-
-    const update = await Advertisement.findByIdAndUpdate(adId, updateAdvertisement).then(() => {
-
-        res.status(200).send({status : "Advertisement Updated"})
-    }).catch((err) => {
-
-        console.log(err);
-        res.status(500).send({status : "Error with updating advertisement", error : err.message});
-    })
-})
+    // Update the advertisement in the database
+    Advertisement.findByIdAndUpdate(adId, updateAdvertisement)
+        .then(() => {
+            res.status(200).send({ status: "Advertisement Updated" });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send({ status: "Error with updating advertisement", error: err.message });
+        });
+});
 
 router.route("/delete/:id").delete(async (req, res) => {
 
@@ -120,4 +112,6 @@ router.route("/get/:id").get(async (req, res) => {
     })
 })
 
-module.exports = router;
+
+    return router;
+}
