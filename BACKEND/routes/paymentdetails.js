@@ -5,13 +5,13 @@ let paymentDetails = require("../models/paymentdetails");
 //create 
 router.route("/add").post((req,res)=>{
 
-    const paymentId = req.body.paymentId;
+    //const paymentId = req.body.paymentId;
     const paymentType = req.body.paymentType;
     const amount = Number(req.body.amount);
     const paymentDescription = req.body.paymentDescription;
 
     const newPayment = new paymentDetails({
-        paymentId,
+        //paymentId,
         paymentType,
         amount,
         paymentDescription
@@ -41,10 +41,10 @@ router.route("/").get((req,res)=>{
 router.route("/update/:id").put(async (req, res) => {
      
     let userId = req.params.id;
-    const {paymentId, paymentType, amount, paymentDescription} = req.body;
+    const { paymentType, amount, paymentDescription} = req.body;
 
     const updatePaymentDetail = {
-        paymentId,
+        //paymentId,
         paymentType, 
         amount,
         paymentDescription

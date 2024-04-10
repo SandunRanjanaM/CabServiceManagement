@@ -20,6 +20,7 @@ mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //useFindAndModify: false
+    
 });
 
 const connection = mongoose.connection;
@@ -30,8 +31,10 @@ connection.once("open", () => {
 })
 
 const paymentdetailsRouter = require("./routes/paymentdetails");
-
 app.use("/paymentdetails",paymentdetailsRouter);
+
+const reportsRouter = require("./routes/reports");
+app.use("/reports", reportsRouter);
 
 app.listen(PORT, () => {
 
