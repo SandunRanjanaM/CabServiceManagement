@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 const reportSchema = new Schema({
 
-    /*reportId : {
-        type : String,
-        required : true
-    },*/
     paymentType : {
         type : String,
         required : true
@@ -26,7 +22,7 @@ const reportSchema = new Schema({
     },
     document: {
         type: Buffer, // Assuming you want to store the file as binary data
-        required: true
+        required: false
     }
 
 })
