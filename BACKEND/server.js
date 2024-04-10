@@ -36,6 +36,9 @@ app.use("/paymentdetails",paymentdetailsRouter);
 const reportsRouter = require("./routes/reports");
 app.use("/reports", reportsRouter);
 
+const driverpaymentsRouter = require("./routes/driverpayments");
+app.use("/driverpayments", driverpaymentsRouter);
+
 app.listen(PORT, () => {
 
     console.log(`Server is up and running on port number : ${PORT}`)
