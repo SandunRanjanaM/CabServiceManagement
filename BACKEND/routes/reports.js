@@ -1,79 +1,78 @@
-//const express = require("express");
-const router = require("express").Router();
-let Reports = require("../models/reports");
+const express = require("express");
+const router = express.Router(); 
+const multer = require("multer"); // Import Multer for file uploads
+const fs = require("fs"); // Import the 'fs' module for file operations
+const path = require("path"); // Import the 'path' module for working with file paths
+const Reports = require("../models/reports"); 
 
-const multer = require("multer");
-//require("fs");
-//require("path");
-const fs = require("fs");
-const path = require("path");
+// Set up Multer storage configuration
+const storage = multer.diskStorage({
+  destination: "uploads/", // Destination folder for uploaded files
+  filename: (req, file, cb) => {
+    // Customize the filename (you can use a unique identifier here)
+    const uniqueFileName = `${Date.now()}-${file.originalname}`;
+    cb(null, uniqueFileName);
+  },
+});
 
-const upload = multer({ dest: "uploads/" }); // Destination folder for uploaded files
+// Initialize Multer with the storage configuration
+const upload = multer({ storage });
 
-//create
-router.route("/add", upload.single("document")).post((req, res) => {
+// Create a new payment report
+router.route("/add").post(upload.single("document"), (req, res) => {
+  const { paymentType, department, date, time } = req.body;
+  const documentPath = req.file ? req.file.path : null; // Path to the uploaded file
 
-    //const reportId = req.body.reportId;
-    const paymentType = req.body.paymentType;
-    const department = req.body.department;
-    const date = req.body.date;
-    const time = req.body.time;
-    const documentPath = req.file ? req.file.path : null;  // Path to the uploaded file
-    
-    const newReport = new Reports({
-        //reportId,
-        paymentType,
-        department,
-        date,
-        time,
-        document: documentPath // Store the file path in the document field
+  const newReport = new Reports({
+    paymentType,
+    department,
+    date,
+    time,
+    document: documentPath, // Store the file path in the 'document' field
+  });
 
-    })
+  newReport.save().then(() => {
+      res.json("Payment Report Added");
+    }).catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Error adding payment report" });
+    });
+});
 
-    newReport.save().then(() => {
-        res.json("Payment Report Added")
-
-    }).catch((err)=>{
-        console.log(err);
-    })
-})
-
-//read
+// Read all payment reports
 router.route("/").get((req, res) => {
 
-    Reports.find().then((reports) => {
-        res.json(reports)
-
+  Reports.find().then((reports) => {
+      res.json(reports);
     }).catch((err) => {
-        console.log(err)
-    })
-})
+      console.error(err);
+      res.status(500).json({ error: "Error fetching payment reports" });
+    });
 
-//update
-router.route("/update/:id", upload.single("document")).put(async(req, res) => {
+});
 
-    let userId= req.params.id;
-    const {paymentType, department, date, time} = req.body;
-    const documentPath = req.file ? req.file.path : null;  // Path to the updated document file
+// Update a payment report
+router.route("/update/:id").put(upload.single("document"), async (req, res) => {
+  const userId = req.params.id;
+  const { paymentType, department, date, time } = req.body;
+  const documentPath = req.file ? req.file.path : null; // Path to the updated document file
 
-    const reportUpdate = {
-        //reportId,
-        paymentType,
-        department,
-        date,
-        time,
-        document: documentPath // Update the document path
-    }
+  const reportUpdate = {
+    paymentType,
+    department,
+    date,
+    time,
+    document: documentPath, // Update the document path
+  };
 
-    const update = await Reports.findByIdAndUpdate(userId, reportUpdate).then(() => {
-        res.status(200).send({status: "Payment report updated"})
-
-    }).catch((err) => {
-        console.log(err);
-        res.status(500).send({status: "Error with updating data", error: err.message});
-    })
-
-})
+  try {
+    await Reports.findByIdAndUpdate(userId, reportUpdate);
+    res.status(200).json({ status: "Payment report updated" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ status: "Error updating data", error: err.message });
+  }
+});
 
 //delete
 router.route("/delete/:id").delete(async (req, res) => {
@@ -103,4 +102,5 @@ router.route("/get/:id").get(async (req, res) => {
     })
 })
 
+// Export the router
 module.exports = router;
