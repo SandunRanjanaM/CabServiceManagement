@@ -17,7 +17,7 @@ const advertisementSchema = new Schema ({
     },
 
     content: {
-        type: [String], // Store paths of uploaded images in an array
+        type: [String], 
         required: true
     }
 })
