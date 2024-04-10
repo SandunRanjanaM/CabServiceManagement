@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 
 const paymentdetailsSchema = new Schema({
 
-    paymentId : {
+    /*paymentId : {
         type : String,
         required : true
-    },
+    },*/
     paymentType : {
         type : String,
         required : true
