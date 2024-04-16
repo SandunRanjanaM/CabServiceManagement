@@ -1,13 +1,26 @@
 import './App.css';
-import CounterClass from './components/CounterClass';
-import CounterFunction from './components/CounterFunction';
+import AddPaymentDetails from './components/AddPaymentDetails';
+import Header from './components/Header';
+import Payments from './components/Payments';
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom"
 
 function App() {
   return (
-    <div>
+
+    <Router>
+      <div>
+        
+        <Header/>
+        
+        <Routes>
+        <Route path="/payments" exact components={Payments}/>
+
+        </Routes>
       
-    </div>
-  );
+      </div>
+    </Router>
+
+  )
 }
 
 export default App;
