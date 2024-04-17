@@ -31,13 +31,15 @@ const upload = multer({
 
 module.exports = function(upload) { // Accept upload middleware as parameter
     router.route("/add").post(upload.array('content', 5), (req, res) => { // Accept multiple images with a limit of 5
-        const { title, description } = req.body;
+        const { title, description, email, contact } = req.body;
         const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
 
         const newAdvertisement = new Advertisement({
             title,
             description,
-            content: contentPaths // Save array of paths of uploaded images to content field
+            content: contentPaths, // Save array of paths of uploaded images to content field
+            email,
+            contact
         });
 
         newAdvertisement.save().then(() => {
@@ -63,14 +65,16 @@ router.route("/").get((req, res) => {
 // Route for updating advertisements
 router.route("/update/:id").put(upload.array('content', 5), async (req, res) => {
     const adId = req.params.id;
-    const { title, description } = req.body;
+    const { title, description, email, contact } = req.body;
     const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
 
     // Create an object with updated advertisement data
     const updateAdvertisement = {
         title,
         description,
-        content: contentPaths // Save array of paths of uploaded images to content field
+        content: contentPaths, // Save array of paths of uploaded images to content field
+        email,
+        contact
     };
 
     // Update the advertisement in the database
