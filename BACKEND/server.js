@@ -46,12 +46,15 @@ const storage = multer.diskStorage({
  
  //Specify the storage as multer storage.
  const upload = multer({
-     //Specify the storage as our "Storage" that we created.
-     storage:storage
+    //Specify the storage as our "Storage" that we created.
+    storage:storage,
  //since we are uploading files one by one, we have to make use of "single".
  //we are going to upload images using this name (testImage).
  //since we are uploading files one by one, should make use of "single"
- })
+    limits: {
+        fileSize: 10 * 1024 * 1024, // 10 MB
+    },
+ });
 
 const connection = mongoose.connection;
 
