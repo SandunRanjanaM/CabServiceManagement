@@ -22,7 +22,7 @@ const reportSchema = new Schema({
     },
     document: {
         type: Buffer, // Assuming you want to store the file as binary data
-        required: false
+        required: true
     }
 
 })
