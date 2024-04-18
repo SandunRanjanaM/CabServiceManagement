@@ -7,33 +7,40 @@ const Reports = require("../models/reports");
 
 // Set up Multer storage configuration
 const storage = multer.diskStorage({
+
   destination: "uploads/", // Destination folder for uploaded files
+  
   filename: (req, file, cb) => {
+
     // Customize the filename (you can use a unique identifier here)
     const uniqueFileName = `${Date.now()}-${file.originalname}`;
     cb(null, uniqueFileName);
-  },
+  }
+  
 });
 
 // Initialize Multer with the storage configuration
-const upload = multer({ storage });
+const upload = multer({ storage})
 
 // Create a new payment report
-router.route("/add").post(upload.single("document"), (req, res) => {
+router.route("/add").post(upload.single('document'), async (req, res) => {
   const { paymentType, department, date, time } = req.body;
-  const documentPath = req.file ? req.file.path : null; // Path to the uploaded file
+  const document = req.file.path; // Path to the uploaded file
 
   const newReport = new Reports({
     paymentType,
     department,
     date,
     time,
-    document: documentPath, // Store the file path in the 'document' field
+    document
+
   });
 
-  newReport.save().then(() => {
+  await newReport.save().then(() => {
       res.json("Payment Report Added");
+
     }).catch((err) => {
+
       console.error(err);
       res.status(500).json({ error: "Error adding payment report" });
     });
@@ -54,15 +61,15 @@ router.route("/").get((req, res) => {
 // Update a payment report
 router.route("/update/:id").put(upload.single("document"), async (req, res) => {
   const userId = req.params.id;
-  const { paymentType, department, date, time } = req.body;
-  const documentPath = req.file ? req.file.path : null; // Path to the updated document file
+  const { paymentType, department, date, time, document} = req.body;
+  //const documentPath = req.file ? req.file.path : null; // Path to the updated document file
 
   const reportUpdate = {
     paymentType,
     department,
     date,
     time,
-    document: documentPath, // Update the document path
+    document
   };
 
   try {
