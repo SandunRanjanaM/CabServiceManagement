@@ -32,7 +32,12 @@ const upload = multer({
 module.exports = function(upload) { // Accept upload middleware as parameter
     router.route("/add").post(upload.array('content', 5), (req, res) => { // Accept multiple images with a limit of 5
         const { title, description, email, contact } = req.body;
-        const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
+        const contentPaths = req.files ? req.files.map(file => file.path) : []; // Get paths of uploaded images
+
+        // Check if required fields are missing
+    if (!title || !description || !email || !contact) {
+        return res.status(400).json({ error: "Title, description, email, and contact are required" });
+    }
 
         const newAdvertisement = new Advertisement({
             title,
@@ -66,7 +71,13 @@ router.route("/").get((req, res) => {
 router.route("/update/:id").put(upload.array('content', 5), async (req, res) => {
     const adId = req.params.id;
     const { title, description, email, contact } = req.body;
-    const contentPaths = req.files.map(file => file.path); // Get paths of uploaded images
+
+    // Check if required fields are missing
+    if (!title || !description || !email || !contact) {
+        return res.status(400).json({ error: "Title, description, email, and contact are required" });
+    }
+
+    const contentPaths = req.files ? req.files.map(file => file.path) : []; // Get paths of uploaded images
 
     // Create an object with updated advertisement data
     const updateAdvertisement = {
