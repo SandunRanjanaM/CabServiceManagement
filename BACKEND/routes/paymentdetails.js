@@ -6,12 +6,16 @@ let paymentDetails = require("../models/paymentdetails");
 router.route("/add").post((req,res)=>{
 
     //const paymentId = req.body.paymentId;
+    const name = req.body.name;
+    const date = Date(req.body.date);
     const paymentType = req.body.paymentType;
     const amount = Number(req.body.amount);
     const paymentDescription = req.body.paymentDescription;
 
     const newPayment = new paymentDetails({
         //paymentId,
+        name,
+        date,
         paymentType,
         amount,
         paymentDescription
