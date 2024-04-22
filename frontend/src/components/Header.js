@@ -26,7 +26,7 @@ function Header() {
                 <ul className="dropdown-menu">
                   <li><a className="dropdown-item" href="#">Profile</a></li>
                   <li><Link to="/payments" className="dropdown-item">Payments</Link></li>
-                  <li><a className="dropdown-item" href="#"> Reports </a></li>
+                  <li><Link to="/addreports" className="dropdown-item">Reports</Link></li>
 
                   <li><hr className="dropdown-divider"></hr></li>
                   <li><a className="dropdown-item" href="#">Settings</a></li>
