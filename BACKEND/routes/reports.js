@@ -61,15 +61,20 @@ router.route("/").get((req, res) => {
 // Update a payment report
 router.route("/update/:id").put(upload.single("document"), async (req, res) => {
   const userId = req.params.id;
-  const { paymentType, department, date, time, document} = req.body;
-  //const documentPath = req.file ? req.file.path : null; // Path to the updated document file
+  const { paymentType, department, date, time} = req.body;
+  let documentPath = req.body.document; // Use existing document path by default
+
+  if (req.file) {
+    // If a new file is uploaded, update the document path
+    documentPath = req.file.path;
+  }
 
   const reportUpdate = {
     paymentType,
     department,
     date,
     time,
-    document
+    document: documentPath // Use the updated document path
   };
 
   try {
