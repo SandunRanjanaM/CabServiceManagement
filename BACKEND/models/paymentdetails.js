@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const paymentdetailsSchema = new Schema({
-
+    name : {
+        type : String,
+        required : true
+    },
+    date : {
+        type : Date,
+        required : true
+    },
     paymentType : {
         type : String,
         required : true
