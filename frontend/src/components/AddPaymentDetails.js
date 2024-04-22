@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 export default function AddPaymentDetails() {
 
+    const [name, setName] = useState("");
+    const [date, setDate] = useState("");
     const [paymentType, setPaymentType] = useState("");
     const [amount, setAmount] = useState("");
     const [paymentDescription, setPaymentDescription] = useState("");
@@ -13,14 +15,18 @@ export default function AddPaymentDetails() {
         e.preventDefault();
         
         const newPayment = {
+            name,
+            date,
             paymentType,
             amount,
             paymentDescription
         }
 
         axios.post("http://localhost:8070/paymentdetails/add", newPayment).then(() => {
-            alert("Student Added")
+            alert("Payment Detail Added Successfully")
             
+            setName("");
+            setDate("");
             setPaymentType("");
             setAmount("");
             setPaymentDescription("");
@@ -38,6 +44,28 @@ export default function AddPaymentDetails() {
             <form onSubmit={sendData}>
 
                 <legend>Enter Payment Details</legend>
+            
+            <div className="mb-3">
+                <label for="name" className="form-label">Name</label>
+                <input type="text" className="form-control" id="name" placeholder="Enter name" 
+                onChange={(e) => {
+
+                    setName(e.target.value);
+
+                }}>
+                </input>
+            </div>
+
+            <div className="mb-3">
+                <label for="date" className="form-label">Date</label>
+                <input type="date" className="form-control" id="date" placeholder="Enter date" 
+                onChange={(e) => {
+
+                    setDate(e.target.value);
+
+                }}>
+                </input>
+            </div>
 
             <div className="mb-3">
                 <label for="paymentType" className="form-label">Payment Type</label>
