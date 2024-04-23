@@ -173,6 +173,27 @@ router.route("/get/:id").get(async (req, res) => {
     })
 })
 
+router.route("/approve/:id").put(async (req, res) => {
+    try {
+        const adId = req.params.id;
+        await Advertisement.findByIdAndUpdate(adId, { status: "Approved" });
+        res.status(200).send({ status: "Advertisement Approved" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ status: "Error approving advertisement", error: error.message });
+    }
+})
+
+router.route("/reject/:id").put(async (req, res) => {
+    try {
+        const adId = req.params.id;
+        await Advertisement.findByIdAndUpdate(adId, { status: "Rejected" });
+        res.status(200).send({ status: "Advertisement Rejected" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ status: "Error rejecting advertisement", error: error.message });
+    }
+});
 
     return router;
 }
