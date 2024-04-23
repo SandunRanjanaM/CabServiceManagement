@@ -23,7 +23,7 @@ export default function ManageAds() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8070/advertisement/delete/${id}`);
+            await axios.delete(`http://localhost:8070/advertisement/mdelete/${id}`);
             alert("Advertisement deleted successfully");
             // Optionally, you can refresh the advertisement list after deletion
             getAdvertisements(); // Call getAdvertisements to refresh the list
@@ -81,8 +81,8 @@ export default function ManageAds() {
                                 ))}
                             </td>
                             <td>
-                                <Link to={`/update/${advertisement._id}`} className="btn btn-primary">Update</Link>
-                                <Link to={`/delete/${advertisement._id}`} className="btn btn-danger ml-2" onClick={() => handleDelete(advertisement._id)}>Delete</Link>
+                                <Link to={`/mupdate/${advertisement._id}`} className="btn btn-primary">Update</Link>
+                                <Link to={`/mdelete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link> {/* Navigate to DeleteAd.js */}
                                 <button className="btn btn-success ml-2" onClick={() => handleApprove(advertisement._id)}>Approve</button>
                                 <button className="btn btn-warning ml-2" onClick={() => handleReject(advertisement._id)}>Reject</button>
                             </td>
