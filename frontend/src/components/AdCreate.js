@@ -7,6 +7,7 @@ function AdCreate() {
     const [content, setContent] = useState([]);
     const [email, setEmail] = useState("");
     const [contact, setContact] = useState("");
+    const [status, setStatus] = useState(""); // New state for status
 
     function sendData(e) {
         e.preventDefault();
@@ -16,6 +17,11 @@ function AdCreate() {
         formData.append("description", description);
         formData.append("email", email);
         formData.append("contact", contact);
+
+        // Append status only if it's not empty
+        if (status) {
+            formData.append("status", status);
+        }
 
         for (let i = 0; i < content.length; i++) {
             formData.append("content", content[i]);
