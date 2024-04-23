@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import '../styles/AllAds.css'; // Adjust the import path
 
 export default function AllAds() {
     const [advertisements, setAdvertisements] = useState([]);
