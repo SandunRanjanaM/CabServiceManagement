@@ -1,0 +1,40 @@
+/* CabEditForm.css */
+
+/* Form container */
+.form-container {
+    width: 50%;
+    margin: auto;
+  }
+  
+  /* Form labels */
+  .form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Form inputs */
+  .form-container input[type="text"],
+  .form-container input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Submit button */
+  .form-container button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Submit button hover effect */
+  .form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
