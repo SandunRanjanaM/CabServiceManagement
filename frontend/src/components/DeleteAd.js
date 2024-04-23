@@ -60,7 +60,7 @@ export default function DeleteAdvertisement() {
                     <input type="text" value={advertisement.contact} readOnly className="form-control" />
                 </div>
                 <div className="form-group">
-                    <label>Images:</label>
+                    <label>Content:</label>
                     {advertisement.content.map((imagePath, index) => (
                         <img key={index} src={`http://localhost:8070/${imagePath}`} alt={`Image ${index + 1}`} style={{ width: '100px', height: 'auto', marginRight: '5px' }} />
                     ))}
