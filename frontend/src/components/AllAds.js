@@ -59,6 +59,11 @@ export default function AllAds() {
                             <td>
                                 <Link to={`/update/${advertisement._id}`} className="btn btn-primary">Update</Link>
                                 <Link to={`/delete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link> {/* Navigate to DeleteAd.js */}
+
+                                {advertisement.status === "Approved" && (
+                                    <button className="btn btn-success ml-2">Pay</button>
+                                )}
+
                             </td>
                         </tr>
                     ))}
