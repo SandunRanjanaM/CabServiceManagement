@@ -123,7 +123,7 @@ router.route("/mupdate/:id").put(upload.array('content', 10), async (req, res) =
     // Update the advertisement in the database
     Advertisement.findByIdAndUpdate(adId, updateAdvertisement)
         .then(() => {
-            res.status(200).send({ status: "Advertisement Updated" });
+            res.status(200).send({ status: "Advertisement Update" });
         })
         .catch((err) => {
             console.log(err);
