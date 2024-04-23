@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Importing useParams and useNavigate
+import '../styles/UpdateAd.css'; // Adjust the import path
+
 
 export default function UpdateAdvertisement() {
     const { id } = useParams(); // Use useParams hook to get the advertisement ID from the URL
+    const navigate = useNavigate(); // Using useNavigate hook to access navigation functionality
     const [advertisement, setAdvertisement] = useState({
         title: "",
         description: "",
@@ -60,6 +64,7 @@ export default function UpdateAdvertisement() {
                 }
             });
             alert("Advertisement updated successfully");
+            navigate('/');
             // Redirect to the advertisements list page or perform any other action
         } catch (error) {
             alert(error.message);
