@@ -99,7 +99,53 @@ router.route("/update/:id").put(upload.array('content', 10), async (req, res) =>
         });
 });
 
+// Route for updating advertisements
+router.route("/mupdate/:id").put(upload.array('content', 10), async (req, res) => {
+    const adId = req.params.id;
+    const { title, description, email, contact } = req.body;
+
+    // Check if required fields are missing
+    if (!title || !description || !email || !contact) {
+        return res.status(400).json({ error: "Title, description, email, and contact are required" });
+    }
+
+    const contentPaths = req.files ? req.files.map(file => file.path) : []; // Get paths of uploaded images
+
+    // Create an object with updated advertisement data
+    const updateAdvertisement = {
+        title,
+        description,
+        content: contentPaths, // Save array of paths of uploaded images to content field
+        email,
+        contact
+    };
+
+    // Update the advertisement in the database
+    Advertisement.findByIdAndUpdate(adId, updateAdvertisement)
+        .then(() => {
+            res.status(200).send({ status: "Advertisement Updated" });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send({ status: "Error with updating advertisement", error: err.message });
+        });
+});
+
 router.route("/delete/:id").delete(async (req, res) => {
+
+    let adId = req.params.id;
+
+    await Advertisement.findByIdAndDelete(adId).then(() => {
+
+        res.status(200).send({status : "Advertisement Deleted"});
+    }).catch((err) => {
+
+        console.log(err.message);
+        res.status(500).send({status : "Error with deleting advertisement", error : err.message});
+    })
+})
+
+router.route("/mdelete/:id").delete(async (req, res) => {
 
     let adId = req.params.id;
 
