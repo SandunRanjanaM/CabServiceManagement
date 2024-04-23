@@ -30,7 +30,7 @@ const upload = multer({
 
 
 module.exports = function(upload) { // Accept upload middleware as parameter
-    router.route("/add").post(upload.array('content', 5), (req, res) => { // Accept multiple images with a limit of 5
+    router.route("/add").post(upload.array('content', 10), (req, res) => { // Accept multiple images with a limit of 5
         const { title, description, email, contact } = req.body;
         const contentPaths = req.files ? req.files.map(file => file.path) : []; // Get paths of uploaded images
 
@@ -68,7 +68,7 @@ router.route("/").get((req, res) => {
 })
 
 // Route for updating advertisements
-router.route("/update/:id").put(upload.array('content', 5), async (req, res) => {
+router.route("/update/:id").put(upload.array('content', 10), async (req, res) => {
     const adId = req.params.id;
     const { title, description, email, contact } = req.body;
 
