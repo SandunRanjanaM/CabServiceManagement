@@ -20,6 +20,9 @@ function Header() {
                     <li className="nav-item">
                     <Link to="/add" className="nav-link">Create Ads</Link>
                     </li>
+                    <li className="nav-item">
+                    <Link to="/manage" className="nav-link">Manage Ads</Link>
+                    </li>
                 </ul>
                 </div>
             </div>
