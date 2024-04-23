@@ -39,6 +39,7 @@ export default function AllAds() {
                         <th>Email</th>
                         <th>Contact</th>
                         <th>Content</th>
+                        <th>Status</th> {/* Add Status column */}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@ export default function AllAds() {
                                     <img key={index} src={`http://localhost:8070/${imagePath}`} alt={`Image ${index + 1}`} style={{ width: '100px', height: 'auto', marginRight: '5px' }} />
                                 ))}
                             </td>
+                            <td>{advertisement.status}</td> {/* Display Status */}
                             <td>
                                 <Link to={`/update/${advertisement._id}`} className="btn btn-primary">Update</Link>
                                 <Link to={`/delete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link> {/* Navigate to DeleteAd.js */}
