@@ -26,6 +26,9 @@ function Header() {
                     <li className="nav-item">
                     <Link to="/statistic" className="nav-link">Admin Statistic</Link>
                     </li>
+                    <li className="nav-item">
+                    <Link to="/get" className="nav-link">Manage Payment</Link>
+                    </li>
                 </ul>
                 </div>
             </div>
