@@ -79,6 +79,7 @@ function AdCreate() {
                         id="content"
                         accept="image/*"
                         multiple
+                        required
                         onChange={handleFileChange}
                     />
                 </div>
