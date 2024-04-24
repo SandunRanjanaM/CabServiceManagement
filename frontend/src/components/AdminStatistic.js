@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/AdminStatistic.css'; // Adjust the import path
 
 const AdminStatistic = () => {
     const [statistics, setStatistics] = useState({
         approved: 0,
         rejected: 0,
-        pending: 0
+        pending: 0,
+        paid:0
     });
 
     useEffect(() => {
@@ -21,11 +23,14 @@ const AdminStatistic = () => {
             const approvedCount = advertisements.filter(ad => ad.status === 'Approved').length;
             const rejectedCount = advertisements.filter(ad => ad.status === 'Rejected').length;
             const pendingCount = advertisements.filter(ad => ad.status === 'Pending').length;
+            const paidCount = advertisements.filter(ad => ad.status === 'Paid').length;
+
 
             setStatistics({
                 approved: approvedCount,
                 rejected: rejectedCount,
-                pending: pendingCount
+                pending: pendingCount,
+                paid: paidCount
             });
         } catch (error) {
             console.error('Error fetching statistics:', error);
@@ -33,11 +38,14 @@ const AdminStatistic = () => {
     };
 
     return (
-        <div>
-            <h2>Advertisement Managing Statistics</h2>
-            <p>Approved: {statistics.approved}</p>
-            <p>Rejected: {statistics.rejected}</p>
-            <p>Pending: {statistics.pending}</p>
+        <div className="container">
+            <div className="statistics">
+                <h2>Advertisement Managing Statistics</h2>
+                <p>Approved: {statistics.approved}</p>
+                <p>Rejected: {statistics.rejected}</p>
+                <p>Pending: {statistics.pending}</p>
+                <p>Paid: {statistics.paid}</p>
+            </div>
         </div>
     );
 };
