@@ -1,5 +1,6 @@
 import './App.css';
 import AdCreate from './components/AdCreate';
+import AdminStatistic from './components/AdminStatistic';
 import AdPayment from './components/AdPayment';
 import Header from './components/Header';
 import AllAds from './components/AllAds';
@@ -17,6 +18,7 @@ function App() {
           <Header/>
             <Routes>
               <Route path="/add" element={<AdCreate/>} />
+              <Route path="/statistic" element={<AdminStatistic/>} />
               <Route path="/pay/:id" element={<AdPayment/>} />
               <Route path="/manage" element={<ManageAds/>} />
               <Route path="/delete/:id" element={<DeleteAd/>} />
