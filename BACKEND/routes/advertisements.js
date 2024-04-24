@@ -30,9 +30,10 @@ const upload = multer({
 
 
 module.exports = function(upload) { // Accept upload middleware as parameter
-    router.route("/add").post(upload.array('content', 10), (req, res) => { // Accept multiple images with a limit of 5
+    router.route("/add").post(upload.array('content', 10), upload.single('payment'), (req, res) => { // Accept multiple images with a limit of 5
         const { title, description, email, contact } = req.body;
         const contentPaths = req.files ? req.files.map(file => file.path) : []; // Get paths of uploaded images
+        const paymentPath = req.file ? req.file.path : '';
 
         // Check if required fields are missing
     if (!title || !description || !email || !contact) {
@@ -44,7 +45,8 @@ module.exports = function(upload) { // Accept upload middleware as parameter
             description,
             content: contentPaths, // Save array of paths of uploaded images to content field
             email,
-            contact
+            contact,
+            payment: paymentPaths
         });
 
         newAdvertisement.save().then(() => {
@@ -55,7 +57,26 @@ module.exports = function(upload) { // Accept upload middleware as parameter
         });
     });
 
-   
+    router.route("/pay/:id").post(upload.single('payment'), async (req, res) => {
+        try {
+            const adId = req.params.id;
+            const advertisement = await Advertisement.findById(adId);
+    
+            if (!req.file) {
+                return res.status(400).send({ status: "Error", error: "No payment slip uploaded" });
+            }
+    
+            advertisement.payment = req.file.path;
+            advertisement.status = "Paid";
+            await advertisement.save();
+    
+            res.status(200).send({ status: "Payment Slip Uploaded Successfully" });
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send({ status: "Error processing payment slip", error: error.message });
+        }
+    });
+
 router.route("/").get((req, res) => {
 
     Advertisement.find().then((advertisements) => {
