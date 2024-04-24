@@ -67,7 +67,7 @@ module.exports = function(upload) { // Accept upload middleware as parameter
             }
     
             advertisement.payment = req.file.path;
-            advertisement.status = "Paid";
+            advertisement.status = "Pending";
             await advertisement.save();
     
             res.status(200).send({ status: "Payment Slip Uploaded Successfully" });
