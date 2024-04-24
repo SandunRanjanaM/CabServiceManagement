@@ -68,7 +68,7 @@ export default function PayApprove() {
                             </td>
                             <td>
                                 {advertisement.payment.map((imagePath, index) => (
-                                    <img key={index} src={`http://localhost:8070/${imagePath}`} alt={`Image ${index + 1}`} style={{ width: '100px', height: 'auto', marginRight: '5px' }} />
+                                    <img key={index} src={`http://localhost:8070/${imagePath}`} alt={`No Payment Slip`} style={{ width: '100px', height: 'auto', marginRight: '5px' }} />
                                 ))}
                             </td>
                             <td>
