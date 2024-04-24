@@ -88,6 +88,17 @@ router.route("/").get((req, res) => {
     })
 })
 
+router.route("/get").get((req, res) => {
+
+    Advertisement.find().then((advertisements) => {
+
+        res.json(advertisements)
+    }).catch((err) => {
+
+        console.log(err)
+    })
+})
+
 // Route for updating advertisements
 router.route("/update/:id").put(upload.array('content', 10), async (req, res) => {
     const adId = req.params.id;
@@ -215,6 +226,18 @@ router.route("/reject/:id").put(async (req, res) => {
         res.status(500).send({ status: "Error rejecting advertisement", error: error.message });
     }
 });
+
+router.route("/confirm/:id").put(async (req, res) => {
+    try {
+        const adId = req.params.id;
+        await Advertisement.findByIdAndUpdate(adId, { status: "Paid" });
+        res.status(200).send({ status: "Advertisement Payment Confirmed" });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ status: "Error with Payment Confirmation", error: error.message });
+    }
+});
+
 
     return router;
 }
