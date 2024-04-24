@@ -1,0 +1,54 @@
+/* SystemUsersTable.css */
+
+.table-wrapper {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Make the wrapper take the full viewport height */
+}
+
+.table-container {
+    width: 90%;
+    height: 70vh;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #d3c6c6;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #8b8484;
+}
+
+tr {
+    background-color: #bab6b6;
+}
+
+
+tr:hover {
+    background-color: #ffffff;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.btn-danger {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.btn-update {
+    background-color: blue;
+    color: white;
+}
