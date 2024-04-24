@@ -7,13 +7,15 @@ const advertisementSchema = new Schema ({
     title : {
 
         type : String,
-        required : true
+        required : true,
+        maxlength: 100 // Example: Maximum 100 characters for the title
     },
 
     description : {
 
         type : String,
-        required : true
+        required : true,
+        maxlength: 500 // Example: Maximum 100 characters for the description
     },
 
     content: {
@@ -37,6 +39,11 @@ const advertisementSchema = new Schema ({
         
         type: String 
 
+    },
+
+    payment: {
+
+        type: [String]
     }
 })
 
