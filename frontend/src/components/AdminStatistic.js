@@ -7,7 +7,8 @@ const AdminStatistic = () => {
         approved: 0,
         rejected: 0,
         pending: 0,
-        paid:0
+        paid: 0,
+        totalPaidAmount: 0 // Initialize totalPaidAmount state
     });
 
     useEffect(() => {
@@ -25,12 +26,15 @@ const AdminStatistic = () => {
             const pendingCount = advertisements.filter(ad => ad.status === 'Pending').length;
             const paidCount = advertisements.filter(ad => ad.status === 'Paid').length;
 
+            // Calculate total paid amount
+            const totalPaidAmount = paidCount * 50; // Assuming each paid ad costs $50
 
             setStatistics({
                 approved: approvedCount,
                 rejected: rejectedCount,
                 pending: pendingCount,
-                paid: paidCount
+                paid: paidCount,
+                totalPaidAmount: totalPaidAmount // Set totalPaidAmount in state
             });
         } catch (error) {
             console.error('Error fetching statistics:', error);
@@ -41,10 +45,12 @@ const AdminStatistic = () => {
         <div className="container">
             <div className="statistics">
                 <h2>Advertisement Managing Statistics</h2>
-                <p>Approved: {statistics.approved}</p>
-                <p>Rejected: {statistics.rejected}</p>
-                <p>Pending: {statistics.pending}</p>
-                <p>Paid: {statistics.paid}</p>
+                <p>Approved Advertisements : {statistics.approved}</p>
+                <p>Rejected Advertisements : {statistics.rejected}</p>
+                <p>Payment Confirmation Pending Advertisements : {statistics.pending}</p>
+                <p>Paid Advertisements : {statistics.paid}</p>
+                <p>Each Paid ad costs : $50</p>
+                <p>Total Paid Amount : ${statistics.totalPaidAmount}</p>
             </div>
         </div>
     );
