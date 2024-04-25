@@ -5,6 +5,11 @@ import '../styles/AllAds.css'; // Adjust the import path
 
 export default function AllAds() {
     const [advertisements, setAdvertisements] = useState([]);
+    const [clickCounts, setClickCounts] = useState(() => {
+        // Initialize click counts from localStorage or default to an empty object
+        const storedClickCounts = localStorage.getItem('clickCounts');
+        return storedClickCounts ? JSON.parse(storedClickCounts) : {};
+    });
 
     useEffect(() => {
         async function getAdvertisements() {
@@ -18,6 +23,11 @@ export default function AllAds() {
         getAdvertisements();
     }, []);
 
+    useEffect(() => {
+        // Update localStorage whenever clickCounts state changes
+        localStorage.setItem('clickCounts', JSON.stringify(clickCounts));
+    }, [clickCounts]);
+
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:8070/advertisement/delete/${id}`);
@@ -26,6 +36,12 @@ export default function AllAds() {
         } catch (error) {
             alert(error.message);
         }
+    };
+
+    const handleAdClick = (id) => {
+        const updatedClickCounts = { ...clickCounts };
+        updatedClickCounts[id] = (updatedClickCounts[id] || 0) + 1;
+        setClickCounts(updatedClickCounts);
     };
 
     return (
@@ -66,6 +82,10 @@ export default function AllAds() {
 
                                 {advertisement.status === "Approved" && (
                                     <Link to={`/pay/${advertisement._id}`} className="btn btn-success ml-2">Pay</Link>
+                                )}
+
+                                {advertisement.status === "Paid" && (
+                                    <button className="btn btn-info ml-2" onClick={() => handleAdClick(advertisement._id)}>User Clicks : {clickCounts[advertisement._id] || 0}</button>
                                 )}
                             </td>
                         </tr>
