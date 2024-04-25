@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 
 
 export default function AddPaymentDetails() {
+
+    const { userId } = useParams();
 
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
     const [paymentType, setPaymentType] = useState("");
     const [amount, setAmount] = useState("");
     const [paymentDescription, setPaymentDescription] = useState("");
+    
+
 
     function sendData(e) {
         e.preventDefault();
@@ -38,12 +42,23 @@ export default function AddPaymentDetails() {
 
     }
 
+    const clearForm = () => {
+        setName("");
+        setDate("");
+        setPaymentType("");
+        setAmount("");
+        setPaymentDescription("");
+    }
     return (
+       
+        <div className="container" style={{ width: '50%', margin: '0 auto' }}>
+            <div className="p-3 mb-2 bg-secondary-subtle text-secondary-emphasis">
+            <form onSubmit={sendData} initialValues={{
+                
+            }}>
 
-        <div className="container">
-            <form onSubmit={sendData}>
-
-                <legend>Enter Payment Details</legend>
+            <p className="h1" style={{ textAlign: 'center' }}>Add Payment Details</p>
+            <hr></hr>
             
             <div className="mb-3">
                 <label for="name" className="form-label">Name</label>
@@ -98,11 +113,27 @@ export default function AddPaymentDetails() {
                 }}></input>
             </div>
 
-            <button type="submit" className="btn btn-primary">Submit</button>
+            
+           
+           
+            <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+           
+            <button type="button" class="btn btn-danger" onClick={clearForm}> Clear</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+            
 
-            <Link to="/all" className="btn btn-primary">All Payment Details</Link>
+            <p style={{textAlign:'center'}}>I want change something!!</p>
+            <div class="d-grid gap-2 col-6 mx-auto">
+            <Link to={`/udcuspayments/${userId}`} className="btn btn-outline-primary">Edit Payment</Link>
+            </div>
+            
+            
             </form>
+            </div>
         </div>
+        
         
     )
 }

@@ -46,6 +46,42 @@ router.route("/add").post(upload.single('document'), async (req, res) => {
     });
 });
 
+// Download a payment report document
+router.route("/download/:id").get(async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const report = await Reports.findById(userId);
+
+    if (!report) {
+      return res.status(404).json({ error: "Report not found" });
+    }
+
+    const filePath = report.document;
+
+    // Check if the file exists
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(404).json({ error: "File not found" });
+      }
+
+      // Set the appropriate headers for file download
+      res.set({
+        "Content-Type": "application/pdf", // Set the correct MIME type based on your file type
+        "Content-Disposition": `attachment; filename="${report.paymentType}.pdf"`, // Set the filename for download
+      });
+
+      // Create a readable stream from the file and pipe it to the response
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error downloading payment report", message: err.message });
+  }
+});
+
 // Read all payment reports
 router.route("/").get((req, res) => {
 
@@ -61,20 +97,15 @@ router.route("/").get((req, res) => {
 // Update a payment report
 router.route("/update/:id").put(upload.single("document"), async (req, res) => {
   const userId = req.params.id;
-  const { paymentType, department, date, time} = req.body;
-  let documentPath = req.body.document; // Use existing document path by default
-
-  if (req.file) {
-    // If a new file is uploaded, update the document path
-    documentPath = req.file.path;
-  }
+  const { paymentType, department, date, time } = req.body;
+  const document = req.file ? req.file.path : req.body.document; // Use uploaded file path or existing document path
 
   const reportUpdate = {
     paymentType,
     department,
     date,
     time,
-    document: documentPath // Use the updated document path
+    document,
   };
 
   try {
@@ -85,6 +116,7 @@ router.route("/update/:id").put(upload.single("document"), async (req, res) => {
     res.status(500).json({ status: "Error updating data", error: err.message });
   }
 });
+
 
 //delete
 router.route("/delete/:id").delete(async (req, res) => {

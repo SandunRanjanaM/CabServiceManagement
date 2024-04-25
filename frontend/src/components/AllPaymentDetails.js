@@ -63,18 +63,22 @@ export default function AllPaymentDetails() {
 
 
     return (
-        <div>
-            <h1>All Payment Details</h1>
-            <table className="table">
-                <thead>
+        <div className="p-3 mb-2 bg-transparent text-body">
+           
+            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Payment Details</p>
+            <hr style={{color:'white'}}/>
+            <table className="table table-hover">
+            
+                <thead className="table-dark">
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Date</th>
                         <th scope="col">Payment Type</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Payment Description</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,7 +112,9 @@ export default function AllPaymentDetails() {
                         </tr>
                     ))}
                 </tbody>
+                
             </table>
+           
         </div>
     );
 }

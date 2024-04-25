@@ -62,10 +62,12 @@ export default function AddDriversPayments() {
 
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: '50%', margin: '0 auto' }}>
+            <div className="p-3 mb-2 bg-secondary-subtle text-secondary-emphasis">
             <form onSubmit={sendData}>
 
-                <legend>Calculate Driver Payment</legend>
+            <p className="h1" style={{ textAlign: 'center' }}>Calculate Driver Payment</p>
+            <hr></hr>
             
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">Name</label>
@@ -90,7 +92,7 @@ export default function AddDriversPayments() {
                 onChange={(e) => setAmount(e.target.value)}></input>
             </div>
 
-            <button type="button" className="btn btn-primary" onClick={calculateCommission}>Calculate Commission</button>
+            <button type="button" className="btn btn-outline-warning" onClick={calculateCommission}>Calculate Commission</button>
 
             <div className="mb-3">
                 <label htmlFor="companycommission" className="form-label">Company Commission</label>
@@ -99,7 +101,7 @@ export default function AddDriversPayments() {
                 onChange={(e) => setCompanycommission(e.target.value)}></input>
             </div>
 
-            <button type="button" className="btn btn-primary" onClick={calculateFinalSalary}>Calculate Final Salary</button>
+            <button type="button" className="btn btn-outline-warning" onClick={calculateFinalSalary}>Calculate Final Salary</button>
 
             <div className="mb-3">
                 <label htmlFor="finalsalary" className="form-label">Final Salary</label>
@@ -107,11 +109,13 @@ export default function AddDriversPayments() {
                 value={finalsalary}
                 onChange={(e) => setFinalsalary(e.target.value)}></input>
             </div>
-
-            <button type="submit" className="btn btn-primary">Submit</button>
-
-            <Link to="/all" className="btn btn-primary">All Payment Details</Link>
+            <div className="d-grid gap-2 col-6 mx-auto" style={{ textAlign: 'center' }}>
+            <button type="submit" className="btn btn-outline-success">Submit</button>
+            <Link to="/alldriverpayments" className="btn btn-secondary">All Driver Payments</Link>
+            </div>
+           
             </form>
+            </div>
         </div>
     )
 }

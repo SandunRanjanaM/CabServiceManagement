@@ -21,7 +21,7 @@ const reportSchema = new Schema({
         required : true
     },
     document: {
-        type: Buffer, // Assuming you want to store the file as binary data
+        type: String, // Assuming you want to store the file as binary data
         required: true
     }
 

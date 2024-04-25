@@ -26,18 +26,10 @@ export default function AllPaymentReports() {
             });
     };
 
-    /*
-    // Log the current working directory
-    console.log("Current Working Directory:", process.cwd());
-
-    // List the contents of the current directory
-    fs.readdirSync("uploads/").forEach(file => {
-    console.log(file);
-    });*/
 
     // Function to download a file
-    const downloadFile = (fileUrl) => {
-        axios.get(fileUrl, { responseType: "blob" })
+    const downloadFile = (fileId) => {
+        axios.get(`http://localhost:8070/reports/download/${fileId}`, { responseType: "blob" })
             .then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
@@ -51,7 +43,7 @@ export default function AllPaymentReports() {
                 console.error("Error downloading file:", error);
             });
     };
-    
+
     
     // Function to handle editing
     const handleEdit = (id) => {
@@ -103,18 +95,20 @@ export default function AllPaymentReports() {
 
     
     return (
-        <div>
-            <h1>All Payment Reports</h1>
-            <table className="table">
-                <thead>
+        <div className="p-3 mb-2 bg-transparent text-body">
+            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Payment Reports</p>
+            <hr style={{color:'white'}}/>
+            <table className="table table-hover">
+                <thead className="table-dark">
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">No</th>
                         <th scope="col">Payment Type</th>
                         <th scope="col">Department</th>
                         <th scope="col">Date</th>
                         <th scope="col">Time</th>
                         <th scope="col">File</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -129,7 +123,7 @@ export default function AllPaymentReports() {
                             {editedItem === item._id ? (
                                     <input type="file" data-id={`${item._id}-document`} onChange={handleFileChange} />
                                 ) : (
-                                    <button type="button" className="btn btn-primary" onClick={() => downloadFile(`http://localhost:8070/${item.document}`)}>Download File</button>
+                                    <button type="button" className="btn btn-outline-secondary" onClick={() => downloadFile(`http://localhost:8070/${item.document}`)}>Download File</button>
 
                                 )}
                             </td>
@@ -157,7 +151,7 @@ export default function AllPaymentReports() {
                     ))}
                 </tbody>
             </table>
-            <Link to="/addreports" className="btn btn-primary">Add Payment Report</Link>
+            
         </div>
     );
 }

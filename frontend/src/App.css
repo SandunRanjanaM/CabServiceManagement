@@ -1,3 +1,12 @@
+body{
+  background-image: url('image.jpg');
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 .App {
   text-align: center;
 }

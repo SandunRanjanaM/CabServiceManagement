@@ -11,40 +11,6 @@ export default function AddReports() {
     const [time, setTime] = useState("");
     const [documentFile, setDocumentFile] = useState(null);
   
-    /*function sendData(e) {
-        e.preventDefault();
-
-        const newReport = {
-            paymentType,
-            department,
-            date,
-            time,
-            document
-        };
-
-        axios.post("http://localhost:8070/reports/add", newReport)
-            .then(() => {
-                alert("Payment Report Added Successfully");
-            })
-            .catch((err) => {
-                alert("Error adding payment report")
-                //alert(`Error: ${err.message}`); // Provide a more informative error message
-            });
-    }
-
-    function handleReportFileChange(event) {
-        const documentFile = event.target.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(documentFile);
-        reader.onload = () => {
-            setDocument(documentFile); // Update document state with base64 data
-        };
-        reader.onerror = (error) => {
-            console.log("Error: ", error);
-            console.log("Error adding document");
-        };
-    }*/
-
     function sendData(e) {
         e.preventDefault();
 
@@ -66,17 +32,18 @@ export default function AddReports() {
 
     }
 
-    function handleReportFileChange(event) {
-        const file = event.target.files[0];
-        setDocumentFile(file); // Update state with the selected file
+    function handleFileChange(event) {
+        setDocumentFile(event.target.files[0]); // Update documentFile state directly
     }
 
     
 
     return (
-        <div className="container">
+        <div className="container" style={{ width: '50%', margin: '0 auto' }}>
+             <div className="p-3 mb-2 bg-secondary-subtle text-secondary-emphasis">
             <form onSubmit={sendData}>
-                <legend>Enter Payment Reports</legend>
+            <p className="h1" style={{ textAlign: 'center' }}>Add Payment Report</p>
+            <hr></hr>
 
                 <div className="mb-3">
                     <label htmlFor="paymentType" className="form-label">Payment Type</label>
@@ -137,13 +104,14 @@ export default function AddReports() {
                         className="form-control"
                         id="document"
                         accept=".pdf"
-                        onChange={handleReportFileChange}
+                        onChange={handleFileChange}
                     />
                 </div>
-
-                <button type="submit" className="btn btn-primary">Submit</button>
-                <Link to="/allreports" className="btn btn-primary">All Payment Reports</Link>
+                <div className="d-grid gap-2 col-6 mx-auto" style={{ textAlign: 'center' }}>
+                <button type="submit" className="btn btn-outline-success">Submit</button>
+                </div>
             </form>
+            </div>
         </div>
     );
 }
