@@ -53,6 +53,7 @@ export default function AdPayment() {
                 <p>Branch : {beneficiaryDetails.branch}</p>
                 <p>Contact : {beneficiaryDetails.contact}</p>
                 <p>Payment Amount : 50$</p>
+                <p>Advertisement Duration : 1 Week</p>
                 {/* Display other beneficiary details here */}
             </div>
             <hr />
