@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import {getPayments} from "./AllPaymentDetails.js";
 
 export default function UDcuspayments() {
+
+    const {id} = useParams();
     const [paymentdetails, setPayments] = useState([]);
     const [editedItem, setEditedItem] = useState(null);
     const [selectedUserId, setSelectedUserId] = useState(null);
 
+
     useEffect(() => {
-        // Fetch payment details when the component mounts
-        getPayments(selectedUserId);
-    }, [selectedUserId]);
+        async function getAdvertisement() {
+            try {
+                const response = await axios.get(`http://localhost:8070/paymentdetails/get/${id}`);
+                setPayments(response.data.paymentdetails);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+        getAdvertisement();
+    }, [id]);
 
     // Function to fetch payment details based on user ID
-    const getPayments = (id) => {
+    /*const getPayments = (id) => {
         axios.get(`http://localhost:8070/paymentdetails/get/${id}`)
             .then((res) => {
                 setPayments(res.data);
@@ -21,7 +33,7 @@ export default function UDcuspayments() {
             .catch((err) => {
                 console.error("Error fetching payment details:", err);
             });
-    };
+    };*/
 
     // Function to handle editing
     const handleEdit = (id) => {
