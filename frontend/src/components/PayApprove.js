@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/AllAds.css'; // Adjust the import path
+import jsPDF from 'jspdf'; // Import jsPDF library for PDF generation
 
 export default function PayApprove() {
     const [advertisements, setAdvertisements] = useState([]);
@@ -29,14 +30,29 @@ export default function PayApprove() {
         }
     };
 
-    const handleConfirm = async (id) => {
+    const handleConfirm = async (advertisement) => {
         try {
-            await axios.put(`http://localhost:8070/advertisement/confirm/${id}`);
+            await axios.put(`http://localhost:8070/advertisement/confirm/${advertisement._id}`);
             alert("Advertisement payment confirmed successfully");
-            getAdvertisements(); // Call getAdvertisements to refresh the list
+            generatePaymentReceipt(advertisement); // Generate and download payment receipt
+            getAdvertisements(); // Refresh the advertisement list
         } catch (error) {
             alert(error.message);
         }
+    };
+
+    const generatePaymentReceipt = (advertisement) => {
+        // Create a PDF document
+        const pdf = new jsPDF();
+
+        // Add content to the PDF
+        pdf.text("Payment Successful", 10, 10);
+        pdf.text(`Advertisement Title: ${advertisement.title}`, 10, 20);
+        pdf.text(`User Email: ${advertisement.email}`, 10, 30);
+        // Add more details as needed
+
+        // Save the PDF as a file
+        pdf.save("payment_receipt.pdf");
     };
 
     return (
@@ -72,7 +88,7 @@ export default function PayApprove() {
                                 ))}
                             </td>
                             <td>
-                                {advertisement.payment != 0 && <button className="btn btn-danger ml-2" onClick={() => handleConfirm(advertisement._id)}>Confirm</button>}
+                                {advertisement.payment != 0 && <button className="btn btn-danger ml-2" onClick={() => handleConfirm(advertisement)}>Confirm</button>}
                             </td>
                         </tr>
                     ))}
