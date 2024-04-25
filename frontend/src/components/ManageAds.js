@@ -80,8 +80,12 @@ export default function ManageAds() {
                             <td>
                                 <Link to={`/mupdate/${advertisement._id}`} className="btn btn-primary">Update</Link>
                                 <Link to={`/mdelete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link>
-                                <button className="btn btn-success ml-2" onClick={() => handleApprove(advertisement._id)}>Approve</button>
-                                <button className="btn btn-warning ml-2" onClick={() => handleReject(advertisement._id)}>Reject</button>
+                                {(advertisement.status !== "Paid" && advertisement.status !== "Pending") && (
+                                    <>
+                                        <button className="btn btn-success ml-2" onClick={() => handleApprove(advertisement._id)}>Approve</button>
+                                        <button className="btn btn-warning ml-2" onClick={() => handleReject(advertisement._id)}>Reject</button>
+                                    </>
+                                )}
                             </td>
                         </tr>
                     ))}
