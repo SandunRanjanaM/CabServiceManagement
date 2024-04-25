@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom'; // Importing useParams and useNavigate
-import '../styles/DeleteAd.css'; // Adjust the import path
+import '../styles/ManagerDelete.css'; // Adjust the import path
 
 
 export default function DeleteAdvertisement() {
