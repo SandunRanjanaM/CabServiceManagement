@@ -57,15 +57,16 @@ export default function AllAds() {
                             </td>
                             <td>{advertisement.status}</td> {/* Display Status */}
                             <td>
-                                <Link to={`/update/${advertisement._id}`} className="btn btn-primary">Update</Link>
-                                <Link to={`/delete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link> {/* Navigate to DeleteAd.js */}
-
-                                {advertisement.status === "Approved" && (
-
-                                    <Link to={`/pay/${advertisement._id}`} className="btn btn-success ml-2">Pay</Link>
-
+                                {advertisement.status !== "Paid" && advertisement.status !== "Pending" && (
+                                    <>
+                                        <Link to={`/update/${advertisement._id}`} className="btn btn-primary">Update</Link>
+                                        <Link to={`/delete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link>
+                                    </>
                                 )}
 
+                                {advertisement.status === "Approved" && (
+                                    <Link to={`/pay/${advertisement._id}`} className="btn btn-success ml-2">Pay</Link>
+                                )}
                             </td>
                         </tr>
                     ))}
