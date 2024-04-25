@@ -67,12 +67,12 @@ export default function PayApprove() {
                                 ))}
                             </td>
                             <td>
-                                {advertisement.payment.map((imagePath, index) => (
+                                {advertisement.payment.length > 0 && advertisement.payment.map((imagePath, index) => (
                                     <img key={index} src={`http://localhost:8070/${imagePath}`} alt={`No Payment Slip`} style={{ width: '100px', height: 'auto', marginRight: '5px' }} />
                                 ))}
                             </td>
                             <td>
-                                <button className="btn btn-danger ml-2" onClick={() => handleConfirm(advertisement._id)}>Confirm</button>
+                                {advertisement.payment != 0 && <button className="btn btn-danger ml-2" onClick={() => handleConfirm(advertisement._id)}>Confirm</button>}
                             </td>
                         </tr>
                     ))}
