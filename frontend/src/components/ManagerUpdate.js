@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; // Importing useParams and useNavigate
-import '../styles/UpdateAd.css'; // Adjust the import path
+import '../styles/ManagerUpdate.css'; // Adjust the import path
 
 
 export default function UpdateAdvertisement() {
