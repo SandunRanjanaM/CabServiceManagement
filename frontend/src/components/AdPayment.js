@@ -8,10 +8,10 @@ export default function AdPayment() {
 
     // Mock beneficiary details (replace with actual data)
     const beneficiaryDetails = {
-        accountNumber: '1234567890',
-        bank: 'Sample Bank',
-        branch: 'Sample Branch',
-        contact: '123-456-7890'
+        accountNumber: '098-2-002-9-0015109',
+        bank: "People's Bank",
+        branch: 'Malabe Branch',
+        contact: '011 - 9012237'
         // Add other beneficiary details here
     };
 
@@ -48,10 +48,11 @@ export default function AdPayment() {
         <div className="ad-payment">
             <h2>Beneficiary Details</h2>
             <div>
-                <p>Account Number: {beneficiaryDetails.accountNumber}</p>
-                <p>Bank: {beneficiaryDetails.bank}</p>
-                <p>Branch: {beneficiaryDetails.branch}</p>
-                <p>Contact: {beneficiaryDetails.contact}</p>
+                <p>Account Number : {beneficiaryDetails.accountNumber}</p>
+                <p>Bank : {beneficiaryDetails.bank}</p>
+                <p>Branch : {beneficiaryDetails.branch}</p>
+                <p>Contact : {beneficiaryDetails.contact}</p>
+                <p>Payment Amount : 50$</p>
                 {/* Display other beneficiary details here */}
             </div>
             <hr />
