@@ -2,16 +2,25 @@
     padding: 20px;
 }
 
+body {
+
+    background-image: url(''); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover; /* Ensure the background image covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
 h1 {
     margin-bottom: 20px;
 }
 
 .table {
-    width: 200%; /* Change width back to 100% for better responsiveness */
+    width: 100%; /* Set width to 100% for responsiveness */
     margin-bottom: 1rem;
     margin-left: -50%; /* Move the table to the left by half of its width */
     color: #333; /* Darkened text color for better readability */
     border-collapse: collapse; /* Collapsed borders for cleaner appearance */
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
 }
 
 .table th,
