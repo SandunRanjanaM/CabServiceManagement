@@ -46,7 +46,7 @@ export default function PayApprove() {
         const pdf = new jsPDF();
 
         // Add content to the PDF
-        pdf.text("Payment Successful", 10, 10);
+        pdf.text("Payment Confirmation Successful", 10, 10);
         pdf.text(`Advertisement Title: ${advertisement.title}`, 10, 20);
         pdf.text(`User Email: ${advertisement.email}`, 10, 30);
         // Add more details as needed
