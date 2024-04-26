@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import '../styles/AdCreate.css'; // Adjust the import path
+import '../styles/AdCreate.css';
 
 function AdCreate() {
     const [title, setTitle] = useState("");
