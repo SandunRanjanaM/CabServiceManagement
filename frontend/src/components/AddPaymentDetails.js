@@ -4,7 +4,7 @@ import { Link, useParams} from "react-router-dom";
 
 
 export default function AddPaymentDetails() {
-
+    const { id } = useParams();
     const { userId } = useParams();
 
     const [name, setName] = useState("");
@@ -34,6 +34,7 @@ export default function AddPaymentDetails() {
             setPaymentType("");
             setAmount("");
             setPaymentDescription("");
+            
 
 
         }).catch((err) => {
@@ -126,7 +127,7 @@ export default function AddPaymentDetails() {
 
             <p style={{textAlign:'center'}}>I want change something!!</p>
             <div class="d-grid gap-2 col-6 mx-auto">
-            <Link to={`/udcuspayments/${userId}`} className="btn btn-outline-primary">Edit Payment</Link>
+            <Link to={`/udcuspayments/${id}`}>Go to Payment Details</Link>
             </div>
             
             

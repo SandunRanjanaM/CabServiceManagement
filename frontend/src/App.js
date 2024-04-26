@@ -32,7 +32,7 @@ function App() {
         <Route path="/home" element={<PaymentManagerHome />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/alldriverpayments" element={<AllDriverPayments />} />
-        <Route path="/get/:id" element={<UDcuspayments />} />
+        <Route path="/udcuspayments/:id" element={<UDcuspayments />} />
         
 
 
