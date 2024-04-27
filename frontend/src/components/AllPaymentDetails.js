@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export default function AllPaymentDetails() {
     const [paymentdetails, setPayments] = useState([]);
@@ -59,6 +61,31 @@ export default function AllPaymentDetails() {
                 alert(err);
             });
     }
+
+    const generatePaymentDetailReciept = () => {
+        const doc = new jsPDF();
+    
+        // Add watermark
+        const watermarkText = "PAYMENT MANAGEMENT";
+        doc.setFontSize(40);
+        doc.setTextColor(200, 200, 200); // Light gray color
+        doc.text(watermarkText, doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() / 2, { align: "center", angle: 45 });
+
+        // Add header
+        const headerText = "All Payment Details";
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0); // Black color
+        doc.text(headerText, 10, 10);
+
+        // Add table
+        doc.autoTable({
+            head: [['Name', 'Date', 'Payment Type', 'Amount', 'Payment Description']],
+            body: paymentdetails.map(item => [item.name, item.date, item.paymentType, item.amount, item.paymentDescription]),
+            startY: 20 // Adjust the startY position to leave space for the header
+        });
+
+        doc.save("allPaymentDetails_receipt.pdf");
+    };
     
 
 
@@ -114,6 +141,10 @@ export default function AllPaymentDetails() {
                 </tbody>
                 
             </table>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button className="btn btn-secondary ml-2" onClick={() => generatePaymentDetailReciept(paymentdetails)}>Download Report</button>
+            </div>
            
         </div>
     );

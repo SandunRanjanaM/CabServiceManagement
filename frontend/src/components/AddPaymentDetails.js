@@ -12,8 +12,6 @@ export default function AddPaymentDetails() {
     const [paymentType, setPaymentType] = useState("");
     const [amount, setAmount] = useState("");
     const [paymentDescription, setPaymentDescription] = useState("");
-    
-
 
     function sendData(e) {
         e.preventDefault();
@@ -43,13 +41,7 @@ export default function AddPaymentDetails() {
 
     }
 
-    const clearForm = () => {
-        setName("");
-        setDate("");
-        setPaymentType("");
-        setAmount("");
-        setPaymentDescription("");
-    }
+    
     return (
        
         <div className="container" style={{ width: '50%', margin: '0 auto' }}>
@@ -113,18 +105,12 @@ export default function AddPaymentDetails() {
 
                 }}></input>
             </div>
-
-            
-           
            
             <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+            <button type="reset" class="btn btn-outline-warning">Reset</button>
             </div>
-           
-            <button type="button" class="btn btn-danger" onClick={clearForm}> Clear</button>
-            <button type="reset" class="btn btn-warning">Reset</button>
             
-
             <p style={{textAlign:'center'}}>I want change something!!</p>
             <div class="d-grid gap-2 col-6 mx-auto">
             <Link to={`/udcuspayments/${id}`}>Go to Payment Details</Link>

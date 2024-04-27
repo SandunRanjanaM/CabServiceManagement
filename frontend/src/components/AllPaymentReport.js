@@ -96,8 +96,10 @@ export default function AllPaymentReports() {
     
     return (
         <div className="p-3 mb-2 bg-transparent text-body">
+            
             <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Payment Reports</p>
             <hr style={{color:'white'}}/>
+            <Link to="/addreports" className="btn btn-secondary">Add Payment Report</Link>
             <table className="table table-hover">
                 <thead className="table-dark">
                     <tr>
