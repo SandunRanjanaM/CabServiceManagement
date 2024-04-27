@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import jsPDF from "jspdf";
 
 export default function AllDriverPayments() {
     const [driverpayments, setDriverpayments] = useState([]);
@@ -78,6 +79,63 @@ export default function AllDriverPayments() {
             });
     }
 
+    const generateDriverPaymentReceipt = () => {
+        const pdf = new jsPDF();
+        
+        // Set up the watermark text
+        const watermarkText = "PAYMENT MANAGEMENT"; // Customize the watermark text as needed
+        const watermarkFontSize = 40;
+        const watermarkColor = [200, 200, 200]; // Light gray color
+        
+        // Add watermark to each page
+        for (let i = 1; i <= pdf.getNumberOfPages(); i++) {
+            pdf.setPage(i);
+            pdf.setFontSize(watermarkFontSize);
+            pdf.setTextColor(...watermarkColor);
+            pdf.text(watermarkText, pdf.internal.pageSize.getWidth() / 2, pdf.internal.pageSize.getHeight() / 2, { align: "center", angle: 45 });
+        }
+        
+        // Reset page settings
+        pdf.setPage(1);
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0); // Reset text color
+        
+        // Set up the headers and column positions
+        const headers = ["Driver Name", "Date", "Final Salary"];
+        const columnWidths = [80, 80, 80]; // Adjusted to match the number of columns
+        const startY = 20;
+        const xOffset = 10;
+        const rowHeight = 10;
+        let currentY = startY;
+    
+        // Add headers
+        pdf.setFont("helvetica", "bold");
+        headers.forEach((header, index) => {
+            pdf.text(header, xOffset + index * columnWidths[index], currentY);
+        });
+        pdf.setFont("helvetica", "normal");
+        
+        // Add data rows
+        driverpayments.forEach((driverPayment) => {
+            currentY += rowHeight;
+            pdf.text(driverPayment.name, xOffset, currentY);
+            pdf.text(driverPayment.date, xOffset + columnWidths[0], currentY); // Display the date
+            pdf.text(driverPayment.finalsalary.toString(), xOffset + columnWidths[0] + columnWidths[1], currentY); // Adjust position for final salary
+        });
+    
+        // Add totals
+        currentY += rowHeight;
+        pdf.text("Total Company Commission:", xOffset, currentY);
+        pdf.text(totalCompanyCommission.toString(), xOffset + columnWidths[0], currentY);
+        currentY += rowHeight;
+        pdf.text("Total Final Salary:", xOffset, currentY);
+        pdf.text(totalFinalSalary.toString(), xOffset + columnWidths[0], currentY);
+    
+        // Save the PDF
+        pdf.save("allDriverPayments_receipt.pdf");
+    };
+    
+    
     return(
         <div className="p-3 mb-2 bg-transparent text-body">
            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Driver Payments</p>
@@ -133,6 +191,7 @@ export default function AllDriverPayments() {
                         <td>
                             <button type="button" className="btn btn-outline-danger" onClick={() => deleteData(item._id)}>Delete</button>
                         </td>
+                        
                     </tr>
                 ))}
 
@@ -145,7 +204,9 @@ export default function AllDriverPayments() {
                         <td></td>
                     </tr>
                 </tfoot>
-                
+                <div>
+                <button className="btn btn-secondary ml-2" onClick={() => generateDriverPaymentReceipt(driverpayments)}>Download Report</button>
+                </div>
             </table>
         </div>
     )
