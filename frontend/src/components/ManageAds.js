@@ -5,6 +5,11 @@ import '../styles/ManageAds.css';
 
 export default function ManageAds() {
     const [advertisements, setAdvertisements] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(""); // State variable for search query
+
+    useEffect(() => {
+        getAdvertisements();
+    }, []);
 
     const getAdvertisements = async () => {
         try {
@@ -15,9 +20,10 @@ export default function ManageAds() {
         }
     };
 
-    useEffect(() => {
-        getAdvertisements();
-    }, []);
+    // Filtering advertisements based on search query and email field
+    const filteredAdvertisements = advertisements.filter(advertisement =>
+        advertisement.email.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const handleDelete = async (id) => {
         try {
@@ -51,6 +57,15 @@ export default function ManageAds() {
 
     return (
         <div className='container'>
+            {/* Search bar */}
+            <input
+                type="text"
+                placeholder="Search by email..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+            />
+
             <h1>All Advertisements</h1>
             <table className="table">
                 <thead>
@@ -65,7 +80,7 @@ export default function ManageAds() {
                     </tr>
                 </thead>
                 <tbody>
-                    {advertisements.map(advertisement => (
+                    {filteredAdvertisements.map(advertisement => (
                         <tr key={advertisement._id}>
                             <td>{advertisement.title}</td>
                             <td>{advertisement.description}</td>
