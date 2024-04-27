@@ -5,6 +5,7 @@ let driverPayments = require("../models/driverpayments");
 router.route("/add").post((req, res) => {
     
     const name = req.body.name;
+    const email = req.body.email;
     const date = req.body.date;
     const amount = Number(req.body.amount);
     const companycommission = Number(req.body.companycommission);
@@ -12,6 +13,7 @@ router.route("/add").post((req, res) => {
 
     const newdriverpayment = new driverPayments({
         name,
+        email,
         date,
         amount,
         companycommission,
@@ -45,10 +47,11 @@ router.route("/").get((req, res) => {
 router.route("/update/:id").put(async (req, res) => {
 
     let userId = req.params.id;
-    const {name, date, amount, companycommission, finalsalary} = req.body;
+    const {name, email, date, amount, companycommission, finalsalary} = req.body;
 
     const updateDriverPayments = {
         name,
+        email,
         date,
         amount,
         companycommission,
@@ -96,5 +99,20 @@ router.route("/get/:id").get(async (req, res) => {
 
     })
 })
+
+//search
+router.route("/search").get(async (req, res) => {
+    try {
+        const { email } = req.query;
+        if (!email) {
+            return res.status(400).json({ error: "Email parameter is required for search" });
+        }
+        const driverpayment = await driverPayments.find({ email: email });
+        res.json(driverpayment);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Error searching driver payment", message: error.message });
+    }
+});
 
 module.exports = router;

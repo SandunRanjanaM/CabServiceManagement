@@ -2,17 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
+import _ from 'lodash'; // Import lodash
 
 export default function AllDriverPayments() {
     const [driverpayments, setDriverpayments] = useState([]);
+    const [filteredDriverPayments, setFilteredDriverPayments] = useState([]);
+    const [searchEmail, setSearchEmail] = useState('');
     const [editedItem, setEditedItem] = useState(null);
     const [totalCompanyCommission, setTotalCompanyCommission] = useState(0);
     const [totalFinalSalary, setTotalFinalSalary] = useState(0);
 
+    
     useEffect(() => {
         // Fetch payment details when the component mounts
         getDriverpayments();
     }, []);
+
+    useEffect(() => {
+        // Update filtered data when driver payments or search email change
+        filterDriverPayments();
+    }, [driverpayments, searchEmail]);
     
     // Function to fetch payment details
     const getDriverpayments = () => {
@@ -79,6 +88,7 @@ export default function AllDriverPayments() {
             });
     }
 
+    //Generate Report
     const generateDriverPaymentReceipt = () => {
         const pdf = new jsPDF();
         
@@ -134,17 +144,66 @@ export default function AllDriverPayments() {
         // Save the PDF
         pdf.save("allDriverPayments_receipt.pdf");
     };
-    
-    
+
+    // Function to filter driver payments based on search email
+    const filterDriverPayments = () => {
+        const filteredData = driverpayments.filter((payment) =>
+            payment.email && payment.email.toLowerCase().includes(searchEmail.toLowerCase())
+        );
+        setFilteredDriverPayments(filteredData);
+    };
+
+    // Function to handle search button click
+    const handleSearch = () => {
+        // Reset filteredDriverPayments to an empty array
+        setFilteredDriverPayments([]);
+
+        // Apply new filter based on searchEmail
+        filterDriverPayments();
+    };
+
+
     return(
+            
         <div className="p-3 mb-2 bg-transparent text-body">
-           <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Driver Payments</p>
+           
+           <div className="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search by email"
+                    value={searchEmail}
+                    onChange={(e) => setSearchEmail(e.target.value)}
+                />
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <table className="table table-hover">
+                <thead className="table-dark">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Final Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {filteredDriverPayments.map((payment, index) => (
+                    <tr key={payment._id}>
+                        <td>{index + 1}</td>
+                        <td>{payment.name}</td>
+                        <td>{payment.email}</td>
+                        <td>{payment.finalsalary}</td>
+                    </tr>
+                ))}
+            </tbody>
+            </table>
+            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Driver Payments</p>
            <hr style={{color:'white'}}/>
             <table className="table table-hover">
                 <thead className="table-dark">
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Date</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Company Commission</th>
@@ -166,6 +225,13 @@ export default function AllDriverPayments() {
                         </td>
                         <td>
                             {editedItem === item._id ? (
+                                <input type="email" defaultValue={item.email} data-id={`${item._id}-email`} />
+                            ) : (
+                                item.email
+                            )}
+                        </td>
+                        <td>
+                            {editedItem === item._id ? (
                                 <input type="date" defaultValue={item.date} data-id={`${item._id}-date`} />
                             ) : (
                                 item.date
@@ -178,6 +244,8 @@ export default function AllDriverPayments() {
                             {editedItem === item._id ? (
                                 <>
                                     <button onClick={() => saveEdit(item._id, {
+                                        email : document.querySelector(`input[data-id="${item._id}-email"]`)?.value,
+                                        date : document.querySelector(`input[data-id="${item._id}-date"]`)?.value,
                                         amount: document.querySelector(`input[data-id="${item._id}-amount"]`)?.value,
                                         companycommission: document.querySelector(`input[data-id="${item._id}-companycommission"]`)?.value,
                                         finalsalary: document.querySelector(`input[data-id="${item._id}-finalsalary"]`)?.value,
@@ -204,10 +272,11 @@ export default function AllDriverPayments() {
                         <td></td>
                     </tr>
                 </tfoot>
-                <div>
-                <button className="btn btn-secondary ml-2" onClick={() => generateDriverPaymentReceipt(driverpayments)}>Download Report</button>
-                </div>
+               
             </table>
+            <div>
+                <button className="btn btn-secondary ml-2" onClick={() => generateDriverPaymentReceipt(driverpayments)}>Download Report</button>
+            </div>
         </div>
     )
 }

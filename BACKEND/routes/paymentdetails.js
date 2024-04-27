@@ -82,17 +82,18 @@ router.route("/delete/:id").delete(async (req,res) => {
 
 //fetch data only one user
 router.route("/get/:id").get(async (req, res) => {
-
-    let userId = req.params.id;
-
-    const payment = await paymentDetails.findById(userId).then((paydetail) => {
-        res.status(200).send({status: "Payment fetched", paydetail})
-
-    }).catch(() => {
-        console.log(err.message);
-        res.status(500).send({status: "Error with get payment details", error: err.message});
-    })
-})
+    try {
+        let userId = req.params.id;
+        const payment = await paymentDetails.findById(userId);
+        if (!payment) {
+            return res.status(404).send({ status: "Error", message: "Payment not found" });
+        }
+        res.status(200).send({ status: "Payment fetched", payment });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ status: "Error", message: "Error with fetching payment details" });
+    }
+});
 
 
 module.exports = router;
