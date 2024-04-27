@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import '../styles/PayApprove.css';
+//import '../styles/PayApprove.css';
 import jsPDF from 'jspdf'; // Import jsPDF library for PDF generation
 
 export default function PayApprove() {
