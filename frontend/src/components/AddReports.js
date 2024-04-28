@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-//import { Link } from "react-router";
 import { Link } from "react-router-dom";
-//import FileBase64 from 'react-file-base64';
 
 export default function AddReports() {
     const [paymentType, setPaymentType] = useState("");
@@ -14,12 +12,12 @@ export default function AddReports() {
     function sendData(e) {
         e.preventDefault();
 
-        const formData = new FormData(); // Create FormData object
+        const formData = new FormData(); 
         formData.append("paymentType", paymentType);
         formData.append("department", department);
         formData.append("date", date);
         formData.append("time", time);
-        formData.append("document", documentFile); // Append file to FormData
+        formData.append("document", documentFile); 
 
         axios.post("http://localhost:8070/reports/add", formData)
             .then(() => {
@@ -33,7 +31,7 @@ export default function AddReports() {
     }
 
     function handleFileChange(event) {
-        setDocumentFile(event.target.files[0]); // Update documentFile state directly
+        setDocumentFile(event.target.files[0]); 
     }
 
     
@@ -51,7 +49,7 @@ export default function AddReports() {
                         type="text"
                         className="form-control"
                         id="paymentType"
-                        name="paymentType" // Add name attribute
+                        name="paymentType" 
                         placeholder="Enter payment type"
                         value={paymentType}
                         onChange={(e) => setPaymentType(e.target.value)}

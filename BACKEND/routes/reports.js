@@ -1,31 +1,31 @@
 const express = require("express");
 const router = express.Router(); 
-const multer = require("multer"); // Import Multer for file uploads
-const fs = require("fs"); // Import the 'fs' module for file operations
-const path = require("path"); // Import the 'path' module for working with file paths
+const multer = require("multer"); 
+const fs = require("fs"); 
+const path = require("path"); 
 const Reports = require("../models/reports"); 
 
-// Set up Multer storage configuration
+
 const storage = multer.diskStorage({
 
-  destination: "uploads/", // Destination folder for uploaded files
+  destination: "uploads/",
   
   filename: (req, file, cb) => {
 
-    // Customize the filename (you can use a unique identifier here)
+    
     const uniqueFileName = `${Date.now()}-${file.originalname}`;
     cb(null, uniqueFileName);
   }
   
 });
 
-// Initialize Multer with the storage configuration
+
 const upload = multer({ storage})
 
 // Create a new payment report
 router.route("/add").post(upload.single('document'), async (req, res) => {
   const { paymentType, department, date, time } = req.body;
-  const document = req.file.path; // Path to the uploaded file
+  const document = req.file.path; 
 
   const newReport = new Reports({
     paymentType,
@@ -66,13 +66,13 @@ router.route("/download/:id").get(async (req, res) => {
         return res.status(404).json({ error: "File not found" });
       }
 
-      // Set the appropriate headers for file download
+      
       res.set({
-        "Content-Type": "application/pdf", // Set the correct MIME type based on your file type
-        "Content-Disposition": `attachment; filename="${report.paymentType}.pdf"`, // Set the filename for download
+        "Content-Type": "application/pdf", 
+        "Content-Disposition": `attachment; filename="${report.paymentType}.pdf"`, 
       });
 
-      // Create a readable stream from the file and pipe it to the response
+      
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
     });
@@ -98,7 +98,7 @@ router.route("/").get((req, res) => {
 router.route("/update/:id").put(upload.single("document"), async (req, res) => {
   const userId = req.params.id;
   const { paymentType, department, date, time } = req.body;
-  const document = req.file ? req.file.path : req.body.document; // Use uploaded file path or existing document path
+  const document = req.file ? req.file.path : req.body.document; 
 
   const reportUpdate = {
     paymentType,
@@ -146,5 +146,5 @@ router.route("/get/:id").get(async (req, res) => {
     })
 })
 
-// Export the router
+
 module.exports = router;

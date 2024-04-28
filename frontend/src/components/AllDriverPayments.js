@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import _ from 'lodash'; // Import lodash
+import _ from 'lodash'; 
 
 export default function AllDriverPayments() {
     const [driverpayments, setDriverpayments] = useState([]);
@@ -15,21 +15,18 @@ export default function AllDriverPayments() {
 
     
     useEffect(() => {
-        // Fetch payment details when the component mounts
         getDriverpayments();
     }, []);
 
     useEffect(() => {
-        // Update filtered data when driver payments or search email change
         filterDriverPayments();
     }, [driverpayments, searchEmail]);
     
-    // Function to fetch payment details
+    // Fetch
     const getDriverpayments = () => {
         axios.get("http://localhost:8070/driverpayments/")
             .then((res) => {
                 setDriverpayments(res.data);
-                // Calculate totals after fetching data
                 calculateTotals(res.data);
             })
             .catch((err) => {
@@ -37,7 +34,7 @@ export default function AllDriverPayments() {
             });
     };
 
-    // Function to calculate totals
+    // Commission and final salary calculation
     const calculateTotals = (data) => {
         let totalCompanyComm = 0;
         let totalFinalSal = 0;
@@ -51,33 +48,30 @@ export default function AllDriverPayments() {
 
     // Function to handle editing
     const handleEdit = (id) => {
-        setEditedItem(id); // Set the editedItem state to the ID of the item being edited
+        setEditedItem(id); 
     };
 
-    // Function to save edited data
+    // Update
     const saveEdit = (id, newData) => {
         axios.put(`http://localhost:8070/driverpayments/update/${id}`, newData)
             .then(() => {
                 alert("Driver payment updated");
-                setEditedItem(null); // Reset editedItem state after saving
-                getDriverpayments(); // Refresh payment details
+                setEditedItem(null); 
+                getDriverpayments(); 
             })
             .catch((err) => {
                 console.error("Error updating payment detail:", err);
             });
     };
 
-    //Function to delete data
+    //Delete
     function deleteData(id) {
         axios.delete(`http://localhost:8070/driverpayments/delete/${id}`)
             .then(() => {
                 alert("Item deleted");
-                // After deletion, you may want to update the state or refresh the data
-                // Example: fetch updated data again
                 axios.get("http://localhost:8070/driverpayments")
                     .then(response => {
                         setDriverpayments(response.data);
-                        // Calculate totals after deletion
                         calculateTotals(response.data);
                     })
                     .catch(error => {
@@ -93,18 +87,18 @@ export default function AllDriverPayments() {
     const generateDriverPaymentReceipt = () => {
         const doc = new jsPDF();
     
-        // Set up the watermark text
+        // Set watermark
         const watermarkText = "PAYMENT MANAGEMENT";
         const watermarkFontSize = 40;
-        const watermarkColor = [200, 200, 200]; // Light gray color
+        const watermarkColor = [200, 200, 200]; 
 
-        // Add header
+        // Set header
         const headerText = "All Driver Payments";
         doc.setFontSize(16);
-        doc.setTextColor(0, 0, 0); // Black color
+        doc.setTextColor(0, 0, 0); 
         doc.text(headerText, 10, 10);
     
-        // Add watermark to each page
+       
         for (let i = 1; i <= doc.getNumberOfPages(); i++) {
             doc.setPage(i);
             doc.setFontSize(watermarkFontSize);
@@ -112,23 +106,23 @@ export default function AllDriverPayments() {
             doc.text(watermarkText, doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() / 2, { align: "center", angle: 45 });
         }
     
-        // Reset page settings
+        
         doc.setPage(1);
         doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0); // Reset text color
+        doc.setTextColor(0, 0, 0); 
     
-        // Set up the headers and data
+        
         const headers = ["Name", "Email", "Date", "Amount", "Company Commission", "Final Salary"];
         const data = filteredDriverPayments.map(payment => [payment.name, payment.email, payment.date, payment.amount, payment.companycommission, payment.finalsalary]);
     
-        // Add the table using autotable
+        
         doc.autoTable({
             head: [headers],
             body: data,
             startY: 20
         });
     
-        // Add totals
+        
         const totalCompanyCommissionText = "Total Company Commission:";
         const totalFinalSalaryText = "Total Final Salary:";
         const totals = [
@@ -140,11 +134,11 @@ export default function AllDriverPayments() {
             startY: doc.autoTable.previous.finalY + 10 // Start after the previous table
         });
     
-        // Save the PDF
+        
         doc.save("allDriverPayments_receipt.pdf");
     };
 
-    // Function to filter driver payments based on search email
+    // Search function
     const filterDriverPayments = () => {
         const filteredData = driverpayments.filter((payment) =>
             payment.email && payment.email.toLowerCase().includes(searchEmail.toLowerCase())
@@ -152,18 +146,16 @@ export default function AllDriverPayments() {
         setFilteredDriverPayments(filteredData);
     };
 
-    // Function to handle search button click
+   
     const handleSearch = () => {
-        // Reset filteredDriverPayments to an empty array
+        
         setFilteredDriverPayments([]);
-
-        // Apply new filter based on searchEmail
         filterDriverPayments();
     };
 
 
     return(
-            
+        
         <div className="p-3 mb-2 bg-transparent text-body">
            
            <div className="container">
@@ -213,8 +205,14 @@ export default function AllDriverPayments() {
             </table>
             <hr style={{color:'white'}}/>
             
-            <div className="container">
-            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Driver Payments</p>
+            <div className="row">
+                
+                    <div className="card">
+                        <div className="card-body" style={{textAlign:"center"}}>
+                            <h1 className="card-title">All Driver Payments</h1>
+                        </div>
+                    </div>
+                
             </div>
 
             <Link to="/adddriverpayment" className="btn btn-primary">Calculate Driver Payments</Link>

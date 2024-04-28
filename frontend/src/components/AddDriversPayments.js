@@ -10,9 +10,9 @@ export default function AddDriversPayments() {
     const [amount, setAmount] = useState("");
     const [companycommission, setCompanycommission] = useState("");
     const [finalsalary, setFinalsalary] = useState("");
-    const [emailError, setEmailError] = useState(""); // Added emailError state
+    const [emailError, setEmailError] = useState(""); 
 
-    // Email validation function
+    // Email validation 
     const validateEmail = (email) => {
         const re = /\S+@\S+\.\S+/;
         return re.test(email);
@@ -21,18 +21,18 @@ export default function AddDriversPayments() {
     function sendData(e) {
         e.preventDefault();
 
-        // Validate email input
+        
         if (!validateEmail(email)) {
             setEmailError("Please enter a valid email address.");
             return;
         } else {
-            setEmailError(""); // Clear the error if email is valid
+            setEmailError(""); 
         }
 
-        // Validate amount input
+        // Amount validation
         if (!/^\d+(\.\d{1,2})?$/.test(amount)) {
             alert("Please enter a valid number for the amount.");
-            setAmount(""); // Clear the input field
+            setAmount(""); 
             return;
         }
 

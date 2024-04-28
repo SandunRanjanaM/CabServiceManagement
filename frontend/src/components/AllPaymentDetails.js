@@ -9,11 +9,10 @@ export default function AllPaymentDetails() {
     const [editedItem, setEditedItem] = useState(null);
 
     useEffect(() => {
-        // Fetch payment details when the component mounts
         getPayments();
     }, []);
 
-    // Function to fetch payment details
+    // fetch
     const getPayments = () => {
         axios.get("http://localhost:8070/paymentdetails/")
             .then((res) => {
@@ -24,31 +23,29 @@ export default function AllPaymentDetails() {
             });
     };
 
-    // Function to handle editing
+    
     const handleEdit = (id) => {
-        setEditedItem(id); // Set the editedItem state to the ID of the item being edited
+        setEditedItem(id); 
     };
 
-    // Function to save edited data
+    // update
     const saveEdit = (id, newData) => {
         axios.put(`http://localhost:8070/paymentdetails/update/${id}`, newData)
             .then(() => {
                 alert("Payment detail updated");
-                setEditedItem(null); // Reset editedItem state after saving
-                getPayments(); // Refresh payment details
+                setEditedItem(null);
+                getPayments(); 
             })
             .catch((err) => {
                 console.error("Error updating payment detail:", err);
             });
     };
 
-    //Function to delete data
+    //delete
     function deleteData(id) {
         axios.delete(`http://localhost:8070/paymentdetails/delete/${id}`)
             .then(() => {
                 alert("Item deleted");
-                // After deletion, you may want to update the state or refresh the data
-                // Example: fetch updated data again
                 axios.get("http://localhost:8070/paymentdetails")
                     .then(response => {
                         setPayments(response.data);
@@ -62,26 +59,27 @@ export default function AllPaymentDetails() {
             });
     }
 
+    //report generate
     const generatePaymentDetailReciept = () => {
         const doc = new jsPDF();
     
-        // Add watermark
+        
         const watermarkText = "PAYMENT MANAGEMENT";
         doc.setFontSize(40);
-        doc.setTextColor(200, 200, 200); // Light gray color
+        doc.setTextColor(200, 200, 200); 
         doc.text(watermarkText, doc.internal.pageSize.getWidth() / 2, doc.internal.pageSize.getHeight() / 2, { align: "center", angle: 45 });
 
-        // Add header
+        
         const headerText = "All Payment Details";
         doc.setFontSize(16);
-        doc.setTextColor(0, 0, 0); // Black color
+        doc.setTextColor(0, 0, 0);
         doc.text(headerText, 10, 10);
 
-        // Add table
+        
         doc.autoTable({
             head: [['Name', 'Date', 'Payment Type', 'Amount', 'Payment Description']],
             body: paymentdetails.map(item => [item.name, item.date, item.paymentType, item.amount, item.paymentDescription]),
-            startY: 20 // Adjust the startY position to leave space for the header
+            startY: 20 
         });
 
         doc.save("allPaymentDetails_receipt.pdf");

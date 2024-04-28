@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-//const fs = require("fs");
+
 
 export default function AllPaymentReports() {
 
     const [reports, setReports] = useState([]);
     const [editedItem, setEditedItem] = useState(null);
-    const [file, setFile] = useState(null); // State for file input
+    const [file, setFile] = useState(null); 
 
     useEffect(() => {
-        // Fetch payment details when the component mounts
         getReports();
     }, []);
 
 
-    // Function to fetch payment report
+    //fetch
     const getReports = () => {
         axios.get("http://localhost:8070/reports/")
             .then((res) => {
@@ -27,7 +26,7 @@ export default function AllPaymentReports() {
     };
 
 
-    // Function to download a file
+    // download file
     const downloadFile = (fileId) => {
         axios.get(`http://localhost:8070/reports/download/${fileId}`, { responseType: "blob" })
             .then((response) => {
@@ -45,33 +44,33 @@ export default function AllPaymentReports() {
     };
 
     
-    // Function to handle editing
+   
     const handleEdit = (id) => {
         setEditedItem(id);
         const editedItemData = reports.find((item) => item._id === id);
         setFile(editedItemData.document);
     };
 
-     // Function to handle file input change
+    
      const handleFileChange = (event) => {
         setFile(event.target.files[0]);
     };
     
-    // Function to save edited data
+    // update
     const saveEdit = (id, newData) => {
         const formData = new FormData();
         formData.append("paymentType", newData.paymentType);
         formData.append("department", newData.department);
         formData.append("date", newData.date);
         formData.append("time", newData.time);
-        formData.append("document", file || newData.document); // Use the selected file or existing document
+        formData.append("document", file || newData.document); 
         
         axios.put(`http://localhost:8070/reports/update/${id}`, formData)
           .then(() => {
             alert("Payment report updated");
-            setEditedItem(null); // Reset editedItem state after saving
-            setFile(null); // Reset file state
-            getReports(); // Refresh payment details
+            setEditedItem(null); 
+            setFile(null); 
+            getReports(); 
           })
           .catch((err) => {
             console.error("Error updating payment report:", err);
@@ -79,13 +78,12 @@ export default function AllPaymentReports() {
       };
       
 
-    // Function to delete data
+    // delete
     function deleteData(id) {
         axios.delete(`http://localhost:8070/reports/delete/${id}`)
             .then(() => {
                 alert("Item deleted");
-                // After deletion, you may want to update the state or refresh the data
-                // Example: fetch updated data again
+                
                 getReports();
             })
             .catch((err) => {
@@ -137,7 +135,7 @@ export default function AllPaymentReports() {
                                             department: document.querySelector(`input[data-id="${item._id}-department"]`).value,
                                             date: document.querySelector(`input[data-id="${item._id}-date"]`).value,
                                             time: document.querySelector(`input[data-id="${item._id}-time"]`).value,
-                                            document: file, // Use the selected file
+                                            document: file, 
                                           
                                         })}>Save</button>
                                         <button onClick={() => setEditedItem(null)}>Cancel</button>

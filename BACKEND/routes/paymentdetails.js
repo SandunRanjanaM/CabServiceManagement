@@ -1,11 +1,9 @@
 const router = require("express").Router();
 let paymentDetails = require("../models/paymentdetails");
-//let paymentdetails = require("../models/paymentdetails");
 
 //create 
 router.route("/add").post((req,res)=>{
 
-    //const paymentId = req.body.paymentId;
     const name = req.body.name;
     const date = Date(req.body.date);
     const paymentType = req.body.paymentType;
@@ -55,7 +53,6 @@ router.route("/update/:id").put(async (req, res) => {
     }
 
     const update = await paymentDetails.findByIdAndUpdate(userId, updatePaymentDetail).then(()=> {
-        //res.status(200).send({status: "Payment detail updated"})
         res.status(200).send({status: "Payment detail updated"})
         
     }).catch((err) => {
