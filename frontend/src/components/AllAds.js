@@ -92,7 +92,7 @@ export default function AllAds() {
 
                                 {advertisement.status === "Paid" && (
                                     <>
-                                        <button className="btn btn-info ml-2" onClick={() => handleAdClick(advertisement._id)}>User Clicks : {clickCounts[advertisement._id] || 0}</button>
+                                        <button className="btn btn-info ml-2" onClick={() => handleAdClick(advertisement._id)}>Like : {clickCounts[advertisement._id] || 0}</button>
                                         <button className="btn btn-secondary ml-2" onClick={() => generatePaymentReceipt(advertisement)}>Download Report</button>
                                     </>
                                 )}
