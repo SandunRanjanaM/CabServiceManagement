@@ -76,7 +76,9 @@ export default function AddDriversPayments() {
             <div className="p-3 mb-2 bg-secondary-subtle text-secondary-emphasis">
                 <form onSubmit={sendData}>
 
-                    <p className="h1" style={{ textAlign: 'center' }}>Calculate Driver Payment</p>
+                <div className="container" style={{ textAlign: 'center', color:'black' }}>
+                <p class="h1">Calculate Driver Payment</p>
+                </div>
                     <hr></hr>
 
                     <div className="mb-3">

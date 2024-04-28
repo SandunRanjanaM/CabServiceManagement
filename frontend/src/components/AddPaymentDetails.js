@@ -50,7 +50,9 @@ export default function AddPaymentDetails() {
                 
             }}>
 
-            <p className="h1" style={{ textAlign: 'center' }}>Add Payment Details</p>
+            <div className="container" style={{ textAlign: 'center', color:'black' }}>
+                <p class="h1">Add Payment Details</p>
+            </div>
             <hr></hr>
             
             <div className="mb-3">

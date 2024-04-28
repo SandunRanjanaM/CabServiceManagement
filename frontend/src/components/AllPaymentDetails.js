@@ -90,7 +90,15 @@ export default function AllPaymentDetails() {
     return (
         <div className="p-3 mb-2 bg-transparent text-body">
            
-            <p className="h1" style={{ textAlign: 'center', color:'white' }}>All Payment Details</p>
+           <div className="row">
+                
+                <div className="card">
+                    <div className="card-body" style={{textAlign:"center"}}>
+                        <h1 className="card-title">All Payment Details</h1>
+                    </div>
+                </div>
+            
+           </div>
             <hr style={{color:'white'}}/>
             <table className="table table-hover">
             

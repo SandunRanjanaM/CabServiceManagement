@@ -40,7 +40,9 @@ export default function AddReports() {
         <div className="container" style={{ width: '50%', margin: '0 auto' }}>
              <div className="p-3 mb-2 bg-secondary-subtle text-secondary-emphasis">
             <form onSubmit={sendData}>
-            <p className="h1" style={{ textAlign: 'center' }}>Add Payment Report</p>
+            <div className="container" style={{ textAlign: 'center', color:'black' }}>
+                <p class="h1">Add Payment Report</p>
+            </div>
             <hr></hr>
 
                 <div className="mb-3">
