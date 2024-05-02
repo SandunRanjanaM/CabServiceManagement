@@ -51,7 +51,8 @@ function AdCreate() {
     };
 
     return (
-        <div className="container">
+
+        <div className="container2">
             <form onSubmit={sendData}>
                 <div className="mb-3">
                     <label htmlFor="title">Advertisement Title</label>
