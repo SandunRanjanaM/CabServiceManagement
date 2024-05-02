@@ -2,87 +2,47 @@
     padding: 20px;
 }
 
-body {
-
-    background-image: url(''); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
-    background-size: cover; /* Ensure the background image covers the entire container */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(275px, 1fr)); 
+    gap: 20px;
+    justify-content: center; /* Align center */
 }
 
-h1 {
-    margin-bottom: 20px;
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.table {
-    width: 100%; /* Set width to 100% for responsiveness */
-    margin-bottom: 1rem;
-    margin-left: -50%; /* Move the table to the left by half of its width */
-    color: #333; /* Darkened text color for better readability */
-    border-collapse: collapse; /* Collapsed borders for cleaner appearance */
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
-}
-
-.table th,
-.table td {
-    padding: 1rem; /* Increased padding for better spacing */
-    vertical-align: top;
-    border: 1px solid #ccc; /* Lightened border color for subtler appearance */
-}
-
-.table thead th {
-    border-bottom: 2px solid #ccc; /* Lightened border color for subtler appearance */
-}
-
-.btn {
-    display: inline-block;
-    font-weight: 500; /* Increased font weight for better visibility */
-    text-transform: uppercase; /* Uppercase button text for consistency */
-    cursor: pointer;
-    border: none;
-    padding: 0.75rem 1.5rem; /* Increased padding for better clickability */
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Slowed down transition for smoother effect */
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color: #0056b3; /* Darkened hover color for better feedback */
-}
-
-.btn-danger:hover,
-.btn-danger:focus {
-    background-color: #bd2130; /* Darkened hover color for better feedback */
-}
-
-.ml-2 {
-    margin-left: 10px; /* Increased left margin for better spacing */
-}
-
-.img-thumbnail {
-    padding: 5px; /* Increased padding for better appearance */
-    background-color: #f8f9fa; /* Lightened background color for subtler appearance */
-    border: 1px solid #ddd; /* Lightened border color for subtler appearance */
-    border-radius: 4px; /* Slightly increased border radius for smoother edges */
-    max-width: 100%;
+.card img {
+    width: 100%;
     height: auto;
 }
 
-/* Optional: Add styles for responsiveness */
-@media (max-width: 576px) {
-    .table {
-        font-size: 0.9rem; /* Decreased font size for better responsiveness */
-    }
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+
+.card-email,
+.card-contact {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.card-buttons {
+    margin-top: 10px;
+}
+
+.blurred {
+    filter: blur(10px); /* Add blur effect */
 }
