@@ -49,6 +49,7 @@ export default function PayApprove() {
         pdf.text("Payment Confirmation Successful", 10, 10);
         pdf.text(`Advertisement Title: ${advertisement.title}`, 10, 20);
         pdf.text(`User Email: ${advertisement.email}`, 10, 30);
+        pdf.text(`Duration(in weeks): ${advertisement.duration}`, 10, 40);
         // Add more details as needed
 
         // Save the PDF as a file
