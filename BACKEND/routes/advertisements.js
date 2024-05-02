@@ -244,6 +244,17 @@ router.route("/confirm/:id").put(async (req, res) => {
     }
 });
 
+router.route("/random").get(async (req, res) => {
+    try {
+        const advertisements = await Advertisement.find();
+        const randomIndex = Math.floor(Math.random() * advertisements.length);
+        const randomAdvertisement = advertisements[randomIndex];
+        res.json(randomAdvertisement);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ error: "Error retrieving random advertisement", message: error.message });
+    }
+});
 
     return router;
 }
