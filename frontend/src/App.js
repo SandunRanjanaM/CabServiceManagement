@@ -10,6 +10,7 @@ import UpdateAd from './components/UpdateAd';
 import DeleteAd from './components/DeleteAd';
 import ManagerDelete from './components/ManagerDelete';
 import ManagerUpdate from './components/ManagerUpdate';
+import HomePage from './components/HomePage';
 import {BrowserRouter as  Router, Route, Routes} from "react-router-dom"
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/mdelete/:id" element={<ManagerDelete/>} />
               <Route path="/mupdate/:id" element={<ManagerUpdate/>} />
               <Route path="/get" element={<PayApprove/>} />
+              <Route path="/random" element={<HomePage/>} />
               <Route path="/" element={<AllAds/>} />
             </Routes>
         </div>
