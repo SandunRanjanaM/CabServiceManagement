@@ -47,7 +47,7 @@ const AdminStatistic = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container9">
             <div className="statistics">
                 <h2>Advertisement Managing Statistics</h2>
                 <p>Approved Advertisements : {statistics.approved}</p>
