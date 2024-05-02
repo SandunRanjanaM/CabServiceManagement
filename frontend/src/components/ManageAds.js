@@ -56,7 +56,7 @@ export default function ManageAds() {
     };
 
     return (
-        <div className='container'>
+        <div className='container3'>
             {/* Search bar */}
             <input
                 type="text"
@@ -67,7 +67,7 @@ export default function ManageAds() {
             />
 
             <h1>All Advertisements</h1>
-            <table className="table">
+            <table className="table_1">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -99,14 +99,14 @@ export default function ManageAds() {
                             <td>
                                 {advertisement.status !== "Paid" && (
                                 <>
-                                    <Link to={`/mupdate/${advertisement._id}`} className="btn btn-primary" style={{ marginBottom: '10px' }}>Update</Link>
+                                    <Link to={`/mupdate/${advertisement._id}`} className="btn btn-primary">Update</Link>
                                 </>
                                 )}
-                                <Link to={`/mdelete/${advertisement._id}`} className="btn btn-danger ml-2" style={{ marginBottom: '10px' }} >Delete</Link>
+                                <Link to={`/mdelete/${advertisement._id}`} className="btn btn-danger ml-2">Delete</Link>
                                 {(advertisement.status !== "Paid" && advertisement.status !== "Pending") && (
                                     <>
-                                        <button className="btn btn-success ml-2" onClick={() => handleApprove(advertisement._id)}>Approve</button>
-                                        <button className="btn btn-warning ml-2" onClick={() => handleReject(advertisement._id)}>Reject</button>
+                                        <button className="btn btn-success ml-2" style={{ marginTop: '10px' }} onClick={() => handleApprove(advertisement._id)}>Approve</button>
+                                        <button className="btn btn-warning ml-2" style={{ marginTop: '10px' }} onClick={() => handleReject(advertisement._id)}>Reject</button>
                                     </>
                                 )}
                             </td>
