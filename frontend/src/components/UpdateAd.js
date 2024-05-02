@@ -76,7 +76,7 @@ export default function UpdateAdvertisement() {
     };
 
     return (
-        <div className='container'>
+        <div className='container4'>
             <h1>Update Advertisement</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
