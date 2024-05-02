@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-//import '../styles/PayApprove.css';
+import '../styles/PayApprove.css';
 import jsPDF from 'jspdf'; // Import jsPDF library for PDF generation
 
 export default function PayApprove() {
@@ -57,9 +57,9 @@ export default function PayApprove() {
     };
 
     return (
-        <div className='container'>
+        <div className='container8'>
             <h1>All Advertisements</h1>
-            <table className="table">
+            <table className="table_2">
                 <thead>
                     <tr>
                         <th>Title</th>
