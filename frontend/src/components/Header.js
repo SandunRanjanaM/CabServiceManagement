@@ -18,16 +18,16 @@ function Header() {
                     <Link to="/add" className="nav-link">Create Ads</Link>
                     </li>
                     <li className="nav-item">
-                    <Link to="/" className="nav-link">User View</Link>
+                    <Link to="/" className="nav-link">Ads Gallery</Link>
                     </li>
                     <li className="nav-item">
                     <Link to="/manage" className="nav-link">Manage Ads</Link>
                     </li>
                     <li className="nav-item">
-                    <Link to="/statistic" className="nav-link">Admin Statistic</Link>
+                    <Link to="/statistic" className="nav-link">Ads Statistic</Link>
                     </li>
                     <li className="nav-item">
-                    <Link to="/get" className="nav-link">Manage Payment</Link>
+                    <Link to="/get" className="nav-link">Ads Payment</Link>
                     </li>
                 </ul>
                 </div>
