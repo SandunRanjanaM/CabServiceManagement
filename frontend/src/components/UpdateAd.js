@@ -13,6 +13,8 @@ export default function UpdateAdvertisement() {
         description: "",
         email: "",
         contact: "",
+        duration: "",
+        publishDate: "",
         content: []
     });
     const [newImages, setNewImages] = useState([]); // State to hold newly uploaded images
@@ -56,6 +58,8 @@ export default function UpdateAdvertisement() {
             formData.append('description', advertisement.description);
             formData.append('email', advertisement.email);
             formData.append('contact', advertisement.contact);
+            formData.append('duration', advertisement.duration);
+            formData.append('publishDate', advertisement.publishDate);
 
             // Update advertisement details
             await axios.put(`http://localhost:8070/advertisement/update/${id}`, formData, {
@@ -90,6 +94,14 @@ export default function UpdateAdvertisement() {
                 <div className="form-group">
                     <label>Contact:</label>
                     <input type="text" required pattern="0[0-9]{9}" name="contact" value={advertisement.contact} onChange={handleChange} className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label>Duration:</label>
+                    <input type="number" required name="duration" min="1" step="1" value={advertisement.duration} onChange={handleChange} className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label>Publish Date:</label>
+                    <input type="date" required name="publishDate" value={advertisement.publishDate} onChange={handleChange} className="form-control" />
                 </div>
                 <div className="form-group">
                     <label>Previous Content:</label>
