@@ -42,7 +42,7 @@ export default function DeleteAdvertisement() {
     };
 
     return (
-        <div className='container'>
+        <div className='container6'>
             <h1>Delete Advertisement</h1>
             <form onSubmit={handleDelete}>
                 <div className="form-group">
