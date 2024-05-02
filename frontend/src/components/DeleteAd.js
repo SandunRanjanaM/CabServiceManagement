@@ -13,6 +13,8 @@ export default function DeleteAdvertisement() {
         description: "",
         email: "",
         contact: "",
+        duration: "",
+        publishDate: "",
         content: []
     });
 
@@ -58,6 +60,14 @@ export default function DeleteAdvertisement() {
                 <div className="form-group">
                     <label>Contact:</label>
                     <input type="text" value={advertisement.contact} readOnly className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label>Duration:</label>
+                    <input type="number" value={advertisement.duration} readOnly className="form-control" />
+                </div>
+                <div className="form-group">
+                    <label>Publish Date:</label>
+                    <input type="date" value={advertisement.publishDate} readOnly className="form-control" />
                 </div>
                 <div className="form-group">
                     <label>Content:</label>
