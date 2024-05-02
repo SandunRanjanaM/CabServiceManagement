@@ -1,7 +1,11 @@
-.container {
+.container5 {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    background-image: url('../images/img02.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
   
   .form-group {

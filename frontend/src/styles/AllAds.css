@@ -3,6 +3,7 @@
     background-image: url('../images/img02.jpg');
     background-size: cover; /* Cover the entire container */
     background-position: center; /* Center the background image */
+    background-repeat: no-repeat;
     color: white;
     font-weight: bold;
 }

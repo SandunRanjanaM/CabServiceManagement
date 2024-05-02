@@ -1,0 +1,24 @@
+/* Header */
+.navbar {
+    background-color: #f8f9fa; /* Background color */
+}
+
+.navbar-brand {
+    color: #333; /* Brand text color */
+    font-weight: bold; /* Brand font weight */
+}
+
+.navbar-toggler-icon {
+    color: #333; /* Toggler icon color */
+}
+
+.nav-link {
+    color: #333; /* Link text color */
+    font-weight: bold; /* Link font weight */
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: #007bff; /* Link text color on hover or focus */
+    text-decoration: none; /* Remove underline */
+}

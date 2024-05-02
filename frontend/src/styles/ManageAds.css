@@ -1,28 +1,38 @@
-.container {
+.container3 {
     padding: 20px;
+    background-image: url('../images/img05.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 h1 {
+    font-size: 30px;
     margin-bottom: 20px;
+    color: #ffffff;
 }
 
-.table {
-    width: 240%; /* Change width back to 100% for better responsiveness */
+.table_1 {
+    width: 100%; /* Change width back to 100% for better responsiveness */
     margin-bottom: 1rem;
-    margin-left: -70%; /* Move the table to the left by half of its width */
-    color: #333; /* Darkened text color for better readability */
+    margin-left: 0%; /* Move the table to the left by half of its width */
+    color: #000000; /* Darkened text color for better readability */
     border-collapse: collapse; /* Collapsed borders for cleaner appearance */
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
-.table th,
-.table td {
+.table_1 th,
+.table_1 td {
     padding: 1rem; /* Increased padding for better spacing */
     vertical-align: top;
     border: 1px solid #ccc; /* Lightened border color for subtler appearance */
+    font-weight: bolder;
+    border: 1px solid #000000;
 }
 
-.table thead th {
+.table_1 thead th {
     border-bottom: 2px solid #ccc; /* Lightened border color for subtler appearance */
+    border: 1.5px solid #000000;
 }
 
 .btn {
@@ -73,7 +83,7 @@ h1 {
 
 /* Optional: Add styles for responsiveness */
 @media (max-width: 576px) {
-    .table {
+    .table_1 {
         font-size: 0.9rem; /* Decreased font size for better responsiveness */
     }
 }

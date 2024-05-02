@@ -1,23 +1,19 @@
-.container {
+.container2 {
     margin-top: 50px;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    background-image: url('../images/img03.jpg');
+    background-size: cover; /* Ensure the background image covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
 }
 
 form {
     background-color: rgba(255, 255, 255, 0.5); /* Adjust the transparency here */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-body {
-
-    background-image: url(''); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
-    background-size: cover; /* Ensure the background image covers the entire container */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
 }
 
 form label {
@@ -62,7 +58,7 @@ form label {
 }
 
 @media (max-width: 576px) {
-    .container {
+    .container2 {
         width: 80%;
     }
 }
