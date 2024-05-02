@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import DatePicker from "react-datepicker"; // Import DatePicker component
+import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
 import '../styles/AdCreate.css';
 
 function AdCreate() {
@@ -8,7 +10,9 @@ function AdCreate() {
     const [content, setContent] = useState([]);
     const [email, setEmail] = useState("");
     const [contact, setContact] = useState("");
-    const [status, setStatus] = useState(""); // New state for status
+    const [status, setStatus] = useState("");
+    const [duration, setDuration] = useState(1); // New state for duration, default to 1 week
+    const [publishDate, setPublishDate] = useState(new Date()); // New state for publish date, default to today
 
     function sendData(e) {
         e.preventDefault();
@@ -18,8 +22,9 @@ function AdCreate() {
         formData.append("description", description);
         formData.append("email", email);
         formData.append("contact", contact);
+        formData.append("duration", duration); // Append duration
+        formData.append("publishDate", publishDate); // Append publish date
 
-        // Append status only if it's not empty
         if (status) {
             formData.append("status", status);
         }
@@ -106,6 +111,29 @@ function AdCreate() {
                         pattern="0[0-9]{9}"
                         required
                         onChange={(e) => setContact(e.target.value)}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="duration">Duration (in weeks)</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="duration"
+                        min="1"
+                        step="1"
+                        required
+                        value={duration}
+                        onChange={(e) => setDuration(parseInt(e.target.value))}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="publishDate">Publish Date</label>
+                    <br />
+                    <DatePicker
+                        selected={publishDate}
+                        onChange={(date) => setPublishDate(date)}
+                        dateFormat="yyyy-MM-dd"
+                        required
                     />
                 </div>
 
