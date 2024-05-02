@@ -52,7 +52,7 @@ export default function AllAds() {
     };
 
     return (
-        <div className='container'>
+        <div className='container1'>
             <h1>Advertisements Gallery</h1>
             <div className="card-container">
                 {advertisements.map(advertisement => (
