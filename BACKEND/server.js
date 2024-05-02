@@ -33,6 +33,10 @@ const systemuserRouter = require("./routes/systemusers.js");
 
 app.use("/systemusers",systemuserRouter);
 
+const salaryRouter = require("./routes/salary.js");
+
+app.use("/salary",salaryRouter);
+
 
 
 app.listen(PORT, () => {

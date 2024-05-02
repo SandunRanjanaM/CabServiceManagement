@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import _ from 'lodash'; // Import lodash
 import './SystemUsersTable.css';
 
 const AllsystemUsers = () => {
     const [systemUsers, setSystemUsers] = useState([]);
     const [editedUser, setEditedUser] = useState(null);
-    
+    const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(() => {
         axios.get("http://localhost:8070/systemusers")
             .then(response => {
@@ -15,12 +19,11 @@ const AllsystemUsers = () => {
                 console.error('Error fetching data:', error);
             });
     }, []);
-    
+
     function updateSystemUser(id, updatedUserData) {
         axios.put(`http://localhost:8070/systemusers/update/${id}`, updatedUserData)
             .then(() => {
                 alert("System user updated");
-                // Fetch updated data again
                 axios.get("http://localhost:8070/systemusers")
                     .then(response => {
                         setSystemUsers(response.data);
@@ -38,8 +41,6 @@ const AllsystemUsers = () => {
         axios.delete(`http://localhost:8070/systemusers/delete/${id}`)
             .then(() => {
                 alert("System user deleted");
-                // After deletion, you may want to update the state or refresh the data
-                // Example: fetch updated data again
                 axios.get("http://localhost:8070/systemusers")
                     .then(response => {
                         setSystemUsers(response.data);
@@ -77,77 +78,110 @@ const AllsystemUsers = () => {
         setEditedUser(null);
     }
 
+    function generatePDF() {
+        // Create new jsPDF instance
+        const doc = new jsPDF();
+
+        // Add a title to the PDF
+        doc.text("System Users Report", 10, 10);
+
+        // Prepare table data
+        const tableData = systemUsers.map(user => [user.Emp_ID, user.name, user.password, user.phone_number, user.address, user.Emp_Type]);
+
+        // Add auto table plugin
+        doc.autoTable({
+            head: [['Employee ID', 'Name', 'Password', 'Phone Number', 'Address', 'Employee Type']],
+            body: tableData,
+        });
+
+        // Save the PDF
+        doc.save("system_users_report.pdf");
+    }
+
+    // Function to filter system users based on search query using lodash
+    const filteredUsers = _.filter(systemUsers, (user) => user.Emp_ID.toLowerCase().includes(searchQuery.toLowerCase()));
+
     return (
-        <div class="table-wrapper">
-        <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Employee ID</th>
-                    <th>Name</th>
-                    <th>Password</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Employee Type</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {systemUsers.map(user => (
-                    <tr key={user._id}>
-                        <td>{user.Emp_ID}</td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <input type="text" name="name" value={user.name} onChange={(event) => handleInputChange(event, user._id)} />
-                            ) : (
-                                user.name
-                            )}
-                        </td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <input type="text" name="password" value={user.password} onChange={(event) => handleInputChange(event, user._id)} />
-                            ) : (
-                                user.password
-                            )}
-                        </td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <input type="text" name="phone_number" value={user.phone_number} onChange={(event) => handleInputChange(event, user._id)} />
-                            ) : (
-                                user.phone_number
-                            )}
-                        </td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <input type="text" name="address" value={user.address} onChange={(event) => handleInputChange(event, user._id)} />
-                            ) : (
-                                user.address
-                            )}
-                        </td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <input type="text" name="Emp_Type" value={user.Emp_Type} onChange={(event) => handleInputChange(event, user._id)} />
-                            ) : (
-                                user.Emp_Type
-                            )}
-                        </td>
-                        <td>
-                            {editedUser === user._id ? (
-                                <button className="btn btn-update" onClick={() => saveUpdatedData(user._id)}>Save</button>
-                            ) : (
-                                <button className="btn btn-update" onClick={() => handleEdit(user._id)}>Edit</button>
-                            )}
-                        </td>
-                        <td>
-                            <button className="btn btn-danger" onClick={() => deleteSystemUser(user._id)}>Delete</button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-        </div>
-        </div>
+        <><div>
+            <input style={{marginTop:"5vh",marginLeft:"5vw",width:"15vw"}}
+                type="text"
+                placeholder="Search by ID..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} /></div><div className="table-wrapper">
+
+                
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Password</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Employee Type</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredUsers.map(user => (
+                                <tr key={user._id}>
+                                    <td>{user.Emp_ID}</td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <input type="text" name="name" value={user.name} onChange={(event) => handleInputChange(event, user._id)} />
+                                        ) : (
+                                            user.name
+                                        )}
+                                    </td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <input type="text" name="password" value={user.password} onChange={(event) => handleInputChange(event, user._id)} />
+                                        ) : (
+                                            user.password
+                                        )}
+                                    </td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <input type="text" name="phone_number" value={user.phone_number} onChange={(event) => handleInputChange(event, user._id)} />
+                                        ) : (
+                                            user.phone_number
+                                        )}
+                                    </td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <input type="text" name="address" value={user.address} onChange={(event) => handleInputChange(event, user._id)} />
+                                        ) : (
+                                            user.address
+                                        )}
+                                    </td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <input type="text" name="Emp_Type" value={user.Emp_Type} onChange={(event) => handleInputChange(event, user._id)} />
+                                        ) : (
+                                            user.Emp_Type
+                                        )}
+                                    </td>
+                                    <td>
+                                        {editedUser === user._id ? (
+                                            <button className="btn btn-update" onClick={() => saveUpdatedData(user._id)}>Save</button>
+                                        ) : (
+                                            <button className="btn btn-update" onClick={() => handleEdit(user._id)}>Edit</button>
+                                        )}
+                                    </td>
+                                    <td>
+                                        <button className="btn btn-danger" onClick={() => deleteSystemUser(user._id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div style={{marginTop:"10px"}}>
+                    <button className="btn btn-primary" onClick={generatePDF}>Generate PDF</button>
+                </div>
+                </div>
+            </div></>
     );
 };
 

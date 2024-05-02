@@ -2,12 +2,14 @@
 
 .table-wrapper {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100vh; /* Make the wrapper take the full viewport height */
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    width: 100wh;
 }
 
 .table-container {
+    justify-content: center; 
     width: 90%;
     height: 70vh;
 }
@@ -21,6 +23,7 @@ th, td {
     border: 1px solid #d3c6c6;
     padding: 8px;
     text-align: left;
+    
 }
 
 th {
@@ -47,8 +50,17 @@ tr:hover {
     background-color: #ff0000;
     color: #fff;
 }
+.btn-danger:hover {
+    background-color: #e9313193;
+    color: #fff;
+}
 
 .btn-update {
     background-color: blue;
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: rgba(3, 254, 28, 0.748);
     color: white;
 }

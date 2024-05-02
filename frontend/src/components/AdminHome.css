@@ -1,0 +1,74 @@
+.admin-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.content {
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(233, 153, 5, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.quick-links {
+    margin-bottom: 30px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 10px;
+}
+
+.quick-links ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.quick-links ul li a:hover {
+    background-color: #ddd;
+}
+
+.stats-section {
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat-item {
+    flex: 1;
+    padding: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 0 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.stat-item p {
+    color: #666;
+}
