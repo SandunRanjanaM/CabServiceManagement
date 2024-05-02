@@ -16,6 +16,9 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item">
+                    <Link to="/random" className="nav-link">Home Page</Link>
+                    </li>
+                    <li className="nav-item">
                     <Link to="/add" className="nav-link">Create Ads</Link>
                     </li>
                     <li className="nav-item">
