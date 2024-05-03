@@ -6,6 +6,8 @@ import CabTable from './components/UpdatePackage/CabTable';
 import Header from './components/Header';
 import ViewForm from './components/ViewForm';
 import PackageCounts from './components/PackageCounts';
+import UploadFile from './components/UploadFile';
+import UploadedImagesPage from './components/UploadedImagesPage';
  // Import the new component
 
 function App() {
@@ -19,6 +21,9 @@ function App() {
         <Route path="/delete/:id" element={<CabEditForm />} />
         <Route path="/view" element={<ViewForm />} />
         <Route path="/select" element={<PackageCounts/>} />
+        <Route path="/upload" element={<UploadFile/>} />
+        <Route path="/uploaded-images" element={<UploadedImagesPage/>} />
+
        
       </Routes>
     </BrowserRouter>

@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
+const uploadRoute = require("./routes/uploadRoute.js")
 require("dotenv").config();
 //======================================
 const dateRouter = require('./routes/dateRouter.js');
@@ -38,9 +39,11 @@ const cabRouter = require("./routes/cab.js");
 
 
 app.use("/cab",cabRouter);
+app.use("/uploads", uploadRoute);
 
 app.listen(PORT, () => {
 
     console.log(`Server is up and running on port number : ${PORT}`)
 })
+
 

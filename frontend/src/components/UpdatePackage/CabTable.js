@@ -66,41 +66,58 @@ const CabTable = () => {
     };
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Package Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Time Period</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {cabs.map(cab => (
-                    <tr key={cab._id}>
-                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.packageName} data-id={`${cab._id}-packageName`} /> : cab.packageName}</td>
-                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.description} data-id={`${cab._id}-description`} /> : cab.description}</td>
-                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.price} data-id={`${cab._id}-price`} /> : cab.price}</td>
-                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.timePeriod} data-id={`${cab._id}-timePeriod`} /> : cab.timePeriod}</td>
-                        <td>
-                            {editedCab === cab._id ? (
-                                <>
-                                    <button onClick={() => saveEdit(cab._id, { packageName: document.querySelector(`input[data-id="${cab._id}-packageName"]`).value, description: document.querySelector(`input[data-id="${cab._id}-description"]`).value, price: document.querySelector(`input[data-id="${cab._id}-price"]`).value, timePeriod: document.querySelector(`input[data-id="${cab._id}-timePeriod"]`).value })}>Save</button>
-                                    <button onClick={cancelEdit}>Cancel</button>
-                                </>
-                            ) : (
-                                <button onClick={() => handleEdit(cab._id)}>Edit</button>
-                            )}
-                        </td>
-                        <td>
-                            <button className="btn btn-danger" onClick={() => deleteData(cab._id)}>Delete</button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        
+        <body>
+            <div className="d-flex justify-content-center align-items-center vh-100" style={{ marginTop: '140px'}}>
+            <div style={{ width: '90%' }}>
+            <div class="home">
+                <main class="table" id="cab_table">
+                    <section class="table__header">
+                        <h3>Package Details</h3>
+                    </section>
+                    <section class="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Package Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Time Period</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cabs.map(cab => (
+                                    <tr key={cab._id}>
+                                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.packageName} data-id={`${cab._id}-packageName`} /> : cab.packageName}</td>
+                                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.description} data-id={`${cab._id}-description`} /> : cab.description}</td>
+                                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.price} data-id={`${cab._id}-price`} /> : cab.price}</td>
+                                        <td>{editedCab === cab._id ? <input type="text" defaultValue={cab.timePeriod} data-id={`${cab._id}-timePeriod`} /> : cab.timePeriod}</td>
+                                        <td>
+                                            {editedCab === cab._id ? (
+                                                <>
+                                                    <button onClick={() => saveEdit(cab._id, { packageName: document.querySelector(`input[data-id="${cab._id}-packageName"]`).value, description: document.querySelector(`input[data-id="${cab._id}-description"]`).value, price: document.querySelector(`input[data-id="${cab._id}-price"]`).value, timePeriod: document.querySelector(`input[data-id="${cab._id}-timePeriod"]`).value })}>Save</button>
+                                                    <button onClick={cancelEdit}>Cancel</button>
+                                                </>
+                                            ) : (
+                                                <button onClick={() => handleEdit(cab._id)}>Edit</button>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <button className="btn btn-danger" onClick={() => deleteData(cab._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+            </div>
+            </div>
+            </div>
+            
+        </body>
     );
 };
 

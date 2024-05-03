@@ -29,7 +29,12 @@ const cabSchema = new Schema({
     userCount: {
         type: Number,
         default: 0
-    }
+    },
+    content: {
+        type: [String], 
+        required: true
+    },
+
 });
 
 const Cab = mongoose.model("Cab", cabSchema);

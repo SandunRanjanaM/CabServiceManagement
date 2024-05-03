@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default function AddPackage(){
 
@@ -7,6 +9,7 @@ const[packageName,setpackageName] = useState("");
 const[description,setdescription] = useState("");
 const[price,setprice] = useState("");
 const[timePeriod,settimePeriod] = useState("");
+const [showModal, setShowModal] = useState(false);
 
 function sendData(e){
   e.preventDefault();
@@ -20,8 +23,14 @@ function sendData(e){
        
   }
 
-  axios.post("http://localhost:8070/cab/add",newPackage).then(()=>{
-    alert("Package Added")
+  axios.post("http://localhost:8070/cab/add",newPackage).
+  then(()=>{
+    setShowModal(true);
+            // Reset form fields after successful submission
+            setpackageName("");
+            setdescription("");
+            setprice("");
+            settimePeriod("");
 
   }).catch((err)=>{
     alert(err);
@@ -78,6 +87,17 @@ function sendData(e){
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Package Added</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Your package has been successfully added!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
 </div>
 

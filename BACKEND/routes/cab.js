@@ -6,7 +6,6 @@ const router = express.Router();
 const Cab = require('../models/Cab');
 
 
-
 router.route("/add").post((req,res)=>{
 
     const packageName = req.body.packageName;
@@ -138,6 +137,7 @@ router.post('/select', async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
 
 
 
