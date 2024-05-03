@@ -18,15 +18,29 @@ export default function AddDriversPayments() {
         return re.test(email);
     }
 
+    // Dste validation
+    function isDateValid(inputDate) {
+        const currentDate = new Date();
+        const selectedDate = new Date(inputDate);
+    
+        return selectedDate.toDateString() === currentDate.toDateString();
+    }
+
     function sendData(e) {
         e.preventDefault();
 
-        
+        // Email validation
         if (!validateEmail(email)) {
             setEmailError("Please enter a valid email address.");
             return;
         } else {
             setEmailError(""); 
+        }
+
+        // Date validation
+        if (!isDateValid(date)) {
+            alert("Please enter the valid date");
+            return;
         }
 
         // Amount validation

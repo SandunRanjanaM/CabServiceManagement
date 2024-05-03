@@ -8,9 +8,36 @@ export default function AddReports() {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [documentFile, setDocumentFile] = useState(null);
+
+    function isDateValid(inputDate) {
+        const currentDate = new Date();
+        const selectedDate = new Date(inputDate);
+    
+        // Check if the selected date is today's date
+        return selectedDate.toDateString() === currentDate.toDateString();
+    }
+
+    function isTimeValid(inputTime) {
+        const currentTime = new Date();
+        const selectedTime = new Date(inputTime);
+
+        // Check if the selected time is the current time
+        return selectedTime.getHours() === currentTime.getHours() &&
+            selectedTime.getMinutes() === currentTime.getMinutes();
+    }
   
     function sendData(e) {
         e.preventDefault();
+
+        if (!isDateValid(date)) {
+            alert("Please enter the valid date");
+            return;
+        }
+
+        if (!isTimeValid(time)) {
+            alert("Please enter the current time");
+            return;
+        }
 
         const formData = new FormData(); 
         formData.append("paymentType", paymentType);

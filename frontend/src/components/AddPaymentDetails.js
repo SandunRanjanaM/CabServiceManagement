@@ -13,8 +13,22 @@ export default function AddPaymentDetails() {
     const [amount, setAmount] = useState("");
     const [paymentDescription, setPaymentDescription] = useState("");
 
+    function isDateValid(inputDate) {
+        const currentDate = new Date();
+        const selectedDate = new Date(inputDate);
+    
+        // Check if the selected date is today's date
+        return selectedDate.toDateString() === currentDate.toDateString();
+    }
+    
+
     function sendData(e) {
         e.preventDefault();
+
+        if (!isDateValid(date)) {
+            alert("Please enter the valid date");
+            return;
+        }
         
         const newPayment = {
             name,
