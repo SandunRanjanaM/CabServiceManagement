@@ -1,0 +1,27 @@
+.advertisement-top-bar {
+    background-color: #f8f9fa; /* Background color */
+    color: #333; /* Text color */
+    padding: 10px; /* Padding to add space around content */
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Align items vertically */
+    position: fixed; /* Fix the position to stay at the top of the page */
+    top: 0; /* Position at the top of the page */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it's above other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow for depth */
+}
+
+.advertisement-top-bar h2 {
+    margin: 0; /* Remove default margin for heading */
+}
+
+.advertisement-top-bar p {
+    margin: 0; /* Remove default margin for paragraph */
+}
+
+.advertisement-top-bar img {
+    max-width: 100px; /* Limit the width of the image */
+    height: auto; /* Maintain aspect ratio */
+}
