@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UploadFile = ({ onUploadSuccess }) => {
+const UploadFile = ({ onUploadSuccess, cabId }) => {
   const [file, setFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState(""); // State for upload status
 
@@ -10,7 +10,8 @@ const UploadFile = ({ onUploadSuccess }) => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:8070/uploads/fileUpload", formData);
+        console.log("cab id " + cabId);
+      await axios.post("http://localhost:8070/uploads/fileUpload/" + cabId, formData);
       setUploadStatus("File uploaded successfully!"); // Set upload status message
       onUploadSuccess(); // Call the onUploadSuccess callback
     } catch (error) {

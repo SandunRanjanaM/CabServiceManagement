@@ -120,7 +120,7 @@ const ViewForm = () => {
                                 <p><strong>Time Period:</strong> {selectedPackage.timePeriod}</p>
                             </div>
                         )}
-                        <UploadFile onUploadSuccess={handleUploadSuccess} />
+                        <UploadFile onUploadSuccess={handleUploadSuccess} cabId={selectedPackage ? selectedPackage._id : null} />
                         {successMessage && <p>{successMessage}</p>}
                     </Modal.Body>
                     <Modal.Footer>
