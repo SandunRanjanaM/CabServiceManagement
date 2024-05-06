@@ -8,6 +8,7 @@ import ViewForm from './components/ViewForm';
 import PackageCounts from './components/PackageCounts';
 import UploadFile from './components/UploadFile';
 import UploadedImagesPage from './components/UploadedImagesPage';
+import UploadForm from './components/UploadForm';
  // Import the new component
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
         <Route path="/select" element={<PackageCounts/>} />
         <Route path="/upload" element={<UploadFile/>} />
         <Route path="/uploaded-images" element={<UploadedImagesPage/>} />
+        <Route path="/form" element={<UploadForm/>} />
+
 
        
       </Routes>

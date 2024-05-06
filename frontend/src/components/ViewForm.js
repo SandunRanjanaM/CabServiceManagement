@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-import { Modal, Button, Form } from 'react-bootstrap';
-import UploadFile from './UploadFile';
+import { useParams, useNavigate } from "react-router-dom";
 
 const ViewForm = () => {
     const [cabs, setCabs] = useState([]);
     const [filteredCabs, setFilteredCabs] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedPackage, setSelectedPackage] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [successMessage, setSuccessMessage] = useState("");
-    const [showSuccessPopup, setShowSuccessPopup] = useState(false); // New state for success pop-up
+    const [file] = useState(null);
+    const [setUploadStatus] = useState("");
+    const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
@@ -32,40 +30,37 @@ const ViewForm = () => {
     }, [cabs, searchTerm]);
 
     const handlePackageSelection = (packageName) => {
+        const selected = filteredCabs.find(cab => cab.packageName === packageName);
+        setSelectedPackage(selected);
         axios.post("http://localhost:8070/cab/select", { packageName })
-            .then(response => {
-                console.log('Package selected:', packageName);
-            ////    {*setSuccessMessage(`Package "${packageName}" selected successfully!`);*}
-                setShowModal(true);
-                const selected = filteredCabs.find(cab => cab.packageName === packageName);
-                setSelectedPackage(selected);
-            })
-            .catch(error => {
-                console.error('Error selecting package:', error);
-            });
+        .then(response => {
+            // Navigate to another page with form
+            navigate('/form', { state: { selectedPackage: selected } });
+        })
+        .catch(error => {
+            console.error('Error selecting package:', error);
+        });
     };
 
-    const closeModal = () => {
-        setShowModal(false);
-        setSelectedPackage(null);
-    };
+    const upload = async () => {
+        const formData = new FormData();
+        formData.append("file", file);
 
-    const handleUploadSuccess = () => {
-        setSuccessMessage("Photo uploaded successfully!");
-        setShowSuccessPopup(true); // Show the success pop-up
-        setShowModal(false); // Close the initial modal
-        setTimeout(() => {
-            setShowSuccessPopup(false); // Close the success pop-up after a delay
-            setSuccessMessage(""); // Clear the success message
-        }, 2000); // Adjust the delay time as needed
+        try {
+            console.log("cab id " + selectedPackage._id);
+            await axios.post("http://localhost:8070/uploads/fileUpload/" + selectedPackage._id, formData);
+            setUploadStatus("File uploaded successfully!");
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            setUploadStatus("Error uploading file. Please try again.");
+        }
     };
-    
 
     return (
-        <div className="container d-flex justify-content-center align-items-center vh-250" style={{ marginTop: '100px'}}> 
+        <div className="container" style={{ marginTop: '100px'}}> 
             <div style={{ width: '90%' }}>
-                <Form.Group controlId="search">
-                    <Form.Control
+                <div>
+                    <input
                         type="text"
                         placeholder="Search by package name"
                         value={searchTerm}
@@ -80,7 +75,7 @@ const ViewForm = () => {
                             marginBottom: '10px'
                         }}
                     />
-                </Form.Group>
+                </div>
     
                 <table style={{ width: '100%' }}>
                     <thead>
@@ -106,44 +101,8 @@ const ViewForm = () => {
                         ))}
                     </tbody>
                 </table>
-                
-                <Modal show={showModal} onHide={closeModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Upload File</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {selectedPackage && (
-                            <div>
-                                <h3>Selected Package Details:</h3>
-                                <p><strong>Package Name:</strong> {selectedPackage.packageName}</p>
-                                <p><strong>Price:</strong> {selectedPackage.price}</p>
-                                <p><strong>Time Period:</strong> {selectedPackage.timePeriod}</p>
-                            </div>
-                        )}
-                        <UploadFile onUploadSuccess={handleUploadSuccess} cabId={selectedPackage ? selectedPackage._id : null} />
-                        {successMessage && <p>{successMessage}</p>}
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={closeModal}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
 
-                {/* Success pop-up */}
-                <Modal show={showSuccessPopup} onHide={() => setShowSuccessPopup(false)}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Success</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>Photo uploaded successfully!</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => setShowSuccessPopup(false)}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                
             </div>
         </div>
     );
