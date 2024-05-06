@@ -37,7 +37,7 @@ function Home() {
           </Slider>
         </div>
         <div className="options-container">
-          <a href="" className="btn">Login</a>
+          <a href="/login" className="btn">Login</a>
           <a href="/add" className="btn">Register</a>
         </div>
       </div>

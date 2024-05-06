@@ -1,165 +1,139 @@
-// Update.js
-
-// Update.js
-
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./update.css"; // Import the CSS file
+import logo from "../images/logo.jpg"; 
 
-export default function Update() {
-  const { id } = useParams(); // Get the id parameter from the URL
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [address, setAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [type, setType] = useState("");
-  const [drivingExperience, setDrivingExperience] = useState("");
-  const [licenseYear, setLicenseYear] = useState("");
+export default function UpdateProfile() {
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    age: "",
+    type: "",
+    address: "",
+    drivingExperience: "", 
+    licenseYear: "", 
+  });
+  const { id } = useParams();
 
   useEffect(() => {
-    // Fetch user details based on id
     axios
-      .get(`http://localhost:8070/Customer/${id}`)
+      .get(`http://localhost:8070/customer/get/${id}`)
       .then((response) => {
-        const userData = response.data;
-        setName(userData.name);
-        setAge(userData.age);
-        setAddress(userData.address);
-        setPassword(userData.password);
-        setType(userData.type);
-        setDrivingExperience(userData.drivingExperience);
-        setLicenseYear(userData.licenseYear);
+        const userData = response.data.user;
+        const updatedDetails = {
+          name: userData.name || "",
+          age: userData.age || "",
+          type: userData.type || "",
+          address: userData.address || "", 
+          drivingExperience: userData.drivingExperiance || "",
+          licenseYear: userData.liscenceYear || "", 
+        };
+        setUserDetails(updatedDetails);
+        console.log(response);
       })
-      .catch((error) => {
-        console.error("Error fetching user details:", error);
+      .catch((err) => {
+        console.error("Error fetching user details:", err.response);
       });
-  }, [id]); // Run once when component mounts or id changes
+  }, [id]);
+  
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const updatedUser = {
-      name,
-      age,
-      address,
-      password,
-      type,
-      drivingExperience,
-      licenseYear,
-    };
+ 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+  
+  const handleUpdate = () => {
     axios
-      .put(`http://localhost:8070/Customer/update/${id}`, updatedUser)
-      .then(() => {
-        alert("User details updated");
+      .put(
+        `http://localhost:8070/customer/update/${id}`,
+        {
+          name: userDetails.name,
+          age: userDetails.age,
+          type: userDetails.type,
+          address: userDetails.address,
+          drivingExperience: userDetails.drivingExperience || "",
+          licenseYear: userDetails.licenseYear || "",
+        }
+      )
+      .then((response) => {
+        console.log("User details updated successfully:", response);
       })
-      .catch((error) => {
-        console.error("Error updating user details:", error);
+      .catch((err) => {
+        console.error("Error updating user details:", err.response);
       });
   };
-
-
   return (
     <div className="container">
-      <form onSubmit={sendData} className="border p-4">
-        <div className="mb-3">
-          <label htmlFor="nameInput" className="form-label">
-            Name
-          </label>
+       <img src={logo} alt="Logo" className="logo-img" />
+      <h1>Update Profile</h1>
+
+      <div className="form-container">
+        <div>
+          <label>Name:</label>
           <input
             type="text"
-            className="form-control"
-            id="nameInput"
-            placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={userDetails.name || ""}
+            onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="ageInput" className="form-label">
-            Age
-          </label>
+        <div>
+          <label>Age:</label>
           <input
             type="number"
-            className="form-control"
-            id="ageInput"
-            placeholder="Enter age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            name="age"
+            value={userDetails.age || ""}
+            onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="emailInput" className="form-label">
-            Email Address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="emailInput"
-            placeholder="Enter email"
-            value={Address}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="passwordInput" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="passwordInput"
-            placeholder="Enter password"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="typeSelect" className="form-label">
-            Type
-          </label>
+        <div>
+          <label>Type:</label>
           <select
-            className="form-select"
-            id="typeSelect"
-            value={type}
-            onChange={handleTypeChange}
+            name="type"
+            value={userDetails.type || ""}
+            onChange={handleChange}
           >
             <option value="Customer">Customer</option>
             <option value="Driver">Driver</option>
           </select>
         </div>
-        {type === "Driver" && (
+        <div>
+          <label>Address:</label>
+          <input
+            type="text"
+            name="address"
+            value={userDetails.address || ""}
+            onChange={handleChange}
+          />
+        </div>
+        {userDetails.type === "Driver" && (
           <div>
-            <div className="mb-3">
-              <label htmlFor="drivingExperienceInput" className="form-label">
-                Driving Experience
-              </label>
-              <textarea
-                type="text"
-                className="form-control"
-                id="drivingExperienceInput"
-                placeholder="Type your driving experience"
-                value={drivingExperiance}
-                onChange={(e) => setDrivingExperience(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="licenseYearInput" className="form-label">
-                Year of License
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="licenseYearInput"
-                placeholder="Enter license year"
-                value={liscenceYear}
-                onChange={(e) => setLicenseYear(e.target.value)}
-              />
-            </div>
+            <label>Driving Experience:</label>
+            <input
+              type="text"
+              name="drivingExperience"
+              value={userDetails.drivingExperience || ""}
+              onChange={handleChange}
+            />
           </div>
         )}
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+        {userDetails.type === "Driver" && (
+          <div>
+            <label>License Year:</label>
+            <input
+              type="text"
+              name="licenseYear"
+              value={userDetails.licenseYear || ""}
+              onChange={handleChange}
+            />
+          </div>
+        )}
+        <button onClick={handleUpdate}>Update</button>
+      </div>
     </div>
   );
 }
