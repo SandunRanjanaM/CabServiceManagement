@@ -5,7 +5,7 @@ import { Link, useParams} from "react-router-dom";
 
 export default function AddPaymentDetails() {
     const { id } = useParams();
-    const { userId } = useParams();
+    //const { userId } = useParams();
 
     const [name, setName] = useState("");
     const [date, setDate] = useState("");

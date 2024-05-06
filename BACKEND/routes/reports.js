@@ -1,55 +1,57 @@
 const express = require("express");
 const router = express.Router(); 
-const multer = require("multer"); 
 const fs = require("fs"); 
 const path = require("path"); 
-const Reports = require("../models/reports"); 
+const Reports = require("../models/reports");
+const app = express();
+app.use("files", express.static("document")); 
 
-
+//multer-------------------------------------------
+const multer = require("multer"); 
 const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './files')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + '-' + file.originalname); // Corrected to use 'file.originalname'
+}
 
-  destination: "uploads/",
-  
-  filename: (req, file, cb) => {
+})
 
-    
-    const uniqueFileName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueFileName);
-  }
-  
-});
-
-
-const upload = multer({ storage})
+const upload = multer({ storage: storage })
 
 // Create a new payment report
-router.route("/add").post(upload.single('document'), async (req, res) => {
-  const { paymentType, department, date, time } = req.body;
-  const document = req.file.path; 
+router.post("/add", upload.single("document"), async (req, res) => {
+  console.log(req.file); // Change from req.document to req.file
+  const { paymentType, department, date } = req.body;
+  const documentPath = req.file.path;
 
   const newReport = new Reports({
-    paymentType,
-    department,
-    date,
-    time,
-    document
-
+      paymentType,
+      department,
+      date,
+      document: documentPath
   });
 
-  await newReport.save().then(() => {
-      res.json("Payment Report Added");
-
-    }).catch((err) => {
-
+  try {
+      await newReport.save();
+      res.json({ message: "Payment Report Added" });
+  } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Error adding payment report" });
-    });
+  }
 });
 
 // Download a payment report document
-router.route("/download/:id").get(async (req, res) => {
+router.get("/download/:id", async (req, res) => {
   const userId = req.params.id;
 
+  if (!ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid ID format" });
+  }
+
+  
   try {
     const report = await Reports.findById(userId);
 
@@ -66,21 +68,19 @@ router.route("/download/:id").get(async (req, res) => {
         return res.status(404).json({ error: "File not found" });
       }
 
-      
-      res.set({
-        "Content-Type": "application/pdf", 
-        "Content-Disposition": `attachment; filename="${report.paymentType}.pdf"`, 
+      res.download(filePath, `${report.paymentType}.pdf`, (err) => {
+        if (err) {
+          console.error("Error downloading file:", err);
+          res.status(500).json({ error: "Error downloading file" });
+        }
       });
-
-      
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Error downloading payment report", message: err.message });
   }
 });
+
 
 // Read all payment reports
 router.route("/").get((req, res) => {
@@ -104,7 +104,6 @@ router.route("/update/:id").put(upload.single("document"), async (req, res) => {
     paymentType,
     department,
     date,
-    time,
     document,
   };
 

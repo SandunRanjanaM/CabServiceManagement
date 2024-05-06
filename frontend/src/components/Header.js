@@ -5,7 +5,7 @@ import logo from './logo.png';
 function Header() {
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}>
             
         <div className="container-fluid">
           <a className="navbar-brand" href="#">Payment Mangement</a>

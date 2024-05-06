@@ -7,11 +7,26 @@ export default function AllPaymentReports() {
 
     const [reports, setReports] = useState([]);
     const [editedItem, setEditedItem] = useState(null);
-    const [file, setFile] = useState(null); 
+    const [file, setFile] = useState(null);
+    const [allImage, setAllImage] = useState(null);
 
     useEffect(() => {
         getReports();
     }, []);
+
+    useEffect(() => {
+        getPdf()
+    }, []);
+
+    const getPdf = async() => {
+        const result = await axios.get("http://localhost:8070/reports/");
+        console.log(result.data.data);
+        setAllImage(result.data.data);
+    };
+
+    const showPdf=(pdf)=>{
+        window.open(`http://localhost:3000/files/${pdf}`, "_blank", "noreferrer");
+    }
 
 
     //fetch
@@ -19,6 +34,7 @@ export default function AllPaymentReports() {
         axios.get("http://localhost:8070/reports/")
             .then((res) => {
                 setReports(res.data);
+                getPdf()
             })
             .catch((err) => {
                 console.error("Error fetching payment reports:", err);
@@ -26,9 +42,9 @@ export default function AllPaymentReports() {
     };
 
 
-    // download file
-    const downloadFile = (fileId) => {
-        axios.get(`http://localhost:8070/reports/download/${fileId}`, { responseType: "blob" })
+    // Change the function name to indicate that it downloads a specific file
+    const downloadSpecificFile = (fileUrl) => {
+        axios.get(fileUrl, { responseType: "blob" })
             .then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
@@ -42,7 +58,7 @@ export default function AllPaymentReports() {
                 console.error("Error downloading file:", error);
             });
     };
-
+    
     
    
     const handleEdit = (id) => {
@@ -62,7 +78,6 @@ export default function AllPaymentReports() {
         formData.append("paymentType", newData.paymentType);
         formData.append("department", newData.department);
         formData.append("date", newData.date);
-        formData.append("time", newData.time);
         formData.append("document", file || newData.document); 
         
         axios.put(`http://localhost:8070/reports/update/${id}`, formData)
@@ -113,7 +128,6 @@ export default function AllPaymentReports() {
                         <th scope="col">Payment Type</th>
                         <th scope="col">Department</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Time</th>
                         <th scope="col">File</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
@@ -126,13 +140,11 @@ export default function AllPaymentReports() {
                             <td>{editedItem === item._id ? <input type="text" defaultValue={item.paymentType} data-id={`${item._id}-paymentType`} /> : item.paymentType}</td>
                             <td>{editedItem === item._id ? <input type="text" defaultValue={item.department} data-id={`${item._id}-department`} /> : item.department}</td>
                             <td>{editedItem === item._id ? <input type="date" defaultValue={item.date} data-id={`${item._id}-date`} /> : item.date}</td>
-                            <td>{editedItem === item._id ? <input type="text" defaultValue={item.time} data-id={`${item._id}-time`} /> : item.time}</td>
                             <td>
                             {editedItem === item._id ? (
                                     <input type="file" data-id={`${item._id}-document`} onChange={handleFileChange} />
                                 ) : (
-                                    <button type="button" className="btn btn-outline-secondary" onClick={() => downloadFile(`http://localhost:8070/${item.document}`)}>Download File</button>
-
+                                        <button className="btn btn-outline-secondary" onClick={() => downloadSpecificFile(`http://localhost:8070/${item.document}`)}>Download File</button>
                                 )}
                             </td>
                             <td>
@@ -142,7 +154,6 @@ export default function AllPaymentReports() {
                                             paymentType: document.querySelector(`input[data-id="${item._id}-paymentType"]`).value,
                                             department: document.querySelector(`input[data-id="${item._id}-department"]`).value,
                                             date: document.querySelector(`input[data-id="${item._id}-date"]`).value,
-                                            time: document.querySelector(`input[data-id="${item._id}-time"]`).value,
                                             document: file, 
                                           
                                         })}>Save</button>
@@ -159,6 +170,22 @@ export default function AllPaymentReports() {
                     ))}
                 </tbody>
             </table>
+
+            <div className="uploaded">
+                <h4>Uploaded PDF:</h4>
+                <div className="output-div">
+                    {allImage == null
+                    ? ""
+                    : allImage.map((data) => {
+                        return (
+                            <div className="inner-div">
+                                <h5>Tite</h5>
+                                <button className="btn btn-primary" onClick={() => showPdf(data.pdf)}>Show Pdf</button>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
             
         </div>
     );

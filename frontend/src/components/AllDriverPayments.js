@@ -205,9 +205,9 @@ export default function AllDriverPayments() {
             </table>
             <hr style={{color:'white'}}/>
             
-            <div className="row">
+            <div className="row" style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }} >
                 
-                    <div className="card">
+                    <div className="card" >
                         <div className="card-body" style={{textAlign:"center"}}>
                             <h1 className="card-title">All Driver Payments</h1>
                         </div>

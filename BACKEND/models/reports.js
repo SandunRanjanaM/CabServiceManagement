@@ -16,10 +16,6 @@ const reportSchema = new Schema({
         type : Date,
         required : true
     },
-    time : {
-        type : String,
-        required : true
-    },
     document: {
         type: String, 
         required: true
