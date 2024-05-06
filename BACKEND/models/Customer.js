@@ -11,20 +11,27 @@ const CustomerSchema =new Schema({
         type: Number,
         required:true
     },
-    Gender:{
+    address:{
         type: String,
         required:true
     },
-    Address:{
-        type: String,
+    Password:{
+        type:String,
         required:true
     },
     
-    Type:{
+    type:{
         type: String,
         required:true
     },
-
+    drivingExperiance:{
+        type:String,
+        required:false
+    },
+    liscenceYear:{
+        type:Number,
+        required:false
+    }
 
 
 })
