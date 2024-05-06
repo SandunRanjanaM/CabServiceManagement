@@ -3,30 +3,63 @@
 .container9 {
     width: 80%;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.5);
-    background-image: url('../images/img07.jpg');
+    background-color: rgba(135, 181, 241, 0.5);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-image: url('../images/img08.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .statistics {
     margin-top: 20px;
-    border: 1px solid #f8f8f8;
+    border: 1px solid #ffffff;
     border-radius: 5px;
     padding: 20px;
-    color: #fff;
-    font-weight: bolder;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .statistics h2 {
-    font-size: 25px;
+    font-size: 40px;
     margin-bottom: 15px;
+    color: #ffffff;
 }
 
 .statistics p {
     font-size: 20px;
     margin-bottom: 10px;
+    color: #000000;
 }
 
-/* Add more styles as needed */
+/* Adjust the size of the pie chart */
+#pieChartCanvas {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* Set the background color for the pie chart */
+    border-radius: 5px; /* Set border radius to match the statistics box */
+    padding: 20px;
+}
+
+/* Adjust the size of the bar chart */
+#barChartCanvas {
+    width: 1000px;
+    height: 600px;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* Set the background color for the bar chart */
+    border-radius: 5px; /* Set border radius to match the statistics box */
+    padding: 20px;
+}
+
+/* Chart colors */
+.chart-bg {
+    background-color: #ffffff;
+}
+
+.chart-text {
+    color: #fff;
+}
