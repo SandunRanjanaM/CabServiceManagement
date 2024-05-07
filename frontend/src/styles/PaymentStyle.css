@@ -1,0 +1,49 @@
+.container3 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    background-color: #92beea;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    padding: 15px 20px;
+    background-color: #007bff;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .card-title {
+    margin-bottom: 0;
+    color: #fff;
+  }
+  
+  .card-body {
+    padding: 30px;
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important;
+  }
+  
+  .text-white {
+    color: #fff !important;
+  }
+  
+  .card-text {
+    margin-bottom: 5px;
+  }
+  
+
+  

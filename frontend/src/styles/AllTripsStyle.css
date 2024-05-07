@@ -1,0 +1,147 @@
+/* AllTrips.module.css */
+
+.container2 {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+  
+  
+  .tripCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .tripDetails {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tripName {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .tripDate {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .tripActions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .actionButton {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .actionButton.edit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .actionButton.delete,
+  .btn btn-danger {
+    background-color: #36f4b1;
+    color: white;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 18px;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #808080; /* light black for table headers */
+    color: white;
+  }
+
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2; /* light gray for even rows */
+  }
+  
+  .table tr:nth-child(odd) {
+    background-color: #ffffff; /* white for odd rows */
+  }
+
+  .btn-danger {
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-danger:hover {
+    background-color: #ff7f7f; /* light red on hover */
+  }
+  
+  .btn-warning {
+    color: black;
+  }
+  
+  .btn-primary {
+    background-color: #ffffff; /* white to match odd rows */
+    color: black;
+  }
+  
+  .generateReport {
+    color: rgb(0, 0, 0);
+    width: 160px;
+    height: 40px;
+    background-color: #ffdead;
+  } 
+
+  .actionTop{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+  }
+  .actionBottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+    font-size: 18px;
+  }
+
+  .btn:not(:disabled):not(.disabled) {
+    height: 40px !important;
+    cursor: pointer !important;
+    width: 100px !important;
+  }
+
+  .pButon{
+    padding: 7px !important;
+  }
+
+  .table{
+    zoom: 85% !important;
+    width: 85% !important;
+  }
+
+  .sBar{
+
+  }

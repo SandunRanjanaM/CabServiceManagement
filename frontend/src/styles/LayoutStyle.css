@@ -1,0 +1,32 @@
+.main{
+    padding: 20px;
+    height: 100vh;
+}
+.layout{
+    display: flex;
+    flex-direction: column;
+    
+}
+.content{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    height: 10vh;
+    margin-bottom: 20px;
+    box-shadow:0 0 2px gray;
+    background-color:white ;
+}
+.body{
+    height: 80vh;
+    margin-bottom: 20px;
+    box-shadow:0 0 2px gray;
+    background-color:white ;
+
+}
+.header-content{
+    display: flex;
+    align-items: center;
+    height: 120px;
+
+}
