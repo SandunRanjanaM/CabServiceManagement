@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AddCustomer.css"; 
 import logo from "../images/logo.jpg"; 
+import Navbar from "./Navbar";
 
 export default function AddCustomer() {
   const [name, setName] = useState("");
@@ -55,8 +56,11 @@ export default function AddCustomer() {
   }
 
   return (
+    <div>
+
+     <Navbar />
     <div className="center-container">
-       <img src={logo} alt="Logo" className="logo-img" />
+      
       <form onSubmit={sendData} className="form-container">
         <div>
           <label htmlFor="nameInput">Name</label>
@@ -140,6 +144,7 @@ export default function AddCustomer() {
         )}
         <button type="submit" className="submit-button">Submit</button>
       </form>
+    </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./update.css"; // Import the CSS file
 import logo from "../images/logo.jpg"; 
+import Navbar from "./Navbar";
 
 export default function UpdateProfile() {
   const [userDetails, setUserDetails] = useState({
@@ -67,8 +68,10 @@ export default function UpdateProfile() {
       });
   };
   return (
+    <div>
+       <Navbar />
     <div className="container">
-       <img src={logo} alt="Logo" className="logo-img" />
+      
       <h1>Update Profile</h1>
 
       <div className="form-container">
@@ -134,6 +137,7 @@ export default function UpdateProfile() {
         )}
         <button onClick={handleUpdate}>Update</button>
       </div>
+    </div>
     </div>
   );
 }

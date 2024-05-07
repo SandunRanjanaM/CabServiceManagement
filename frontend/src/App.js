@@ -6,6 +6,9 @@ import UserProfile from "./components/UserProfile";
 import Update from "./components/update";
 import ManageUsers from "./components/manageusers";
 import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import Aboutus from "./components/Aboutus";
+import RealHome from "./components/realhome.js";
 
 function App() {
   return (
@@ -17,6 +20,11 @@ function App() {
         <Route path="/update/:id" element={<Update />} />
         <Route path="/manageusers" element={<ManageUsers />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Navbar" element={<Navbar />} />
+        <Route path="/Aboutus" element={<Aboutus />} />
+        <Route path="/RealHome" element={<RealHome />} />
+
+       
       </Routes>
     </Router>
   );

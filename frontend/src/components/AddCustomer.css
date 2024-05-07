@@ -13,12 +13,13 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #ffffff;
+  margin-top: -20vh;
   position: relative; /* Make container relative for absolute positioning of image */
 }
 
 .logo-img {
   position: absolute;
-  top: 100px; /* Adjust top position as needed */
+  top: 500px; /* Adjust top position as needed */
   left: 50%; /* Center image horizontally */
   transform: translateX(-50%); /* Center image horizontally */
   width: 100px; /* Set width of the image */

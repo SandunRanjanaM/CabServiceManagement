@@ -1,12 +1,12 @@
 .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column; /* Center content vertically */
-    position: relative; /* Enable positioning */
-  }
-  
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+
   .form-container {
     width: 60%;
     max-width: 400px;
@@ -19,7 +19,7 @@
   .logo-img {
     width: 100px;
     height: auto;
-    margin-bottom: 20px; /* Add margin to separate from form */
+    margin-top: 100px;
   }
   
   .input-field {
