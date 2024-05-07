@@ -5,27 +5,20 @@
   align-items: center;
   min-height: 100vh; /* Ensure container takes at least full viewport height */
   background-color: #ffffff;
+  
 }
 
 .form-container {
   width: 80%;
   max-width: 600px;
-  padding: 20px;
+  padding: 50px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #ffffff;
   position: relative;
-  margin-top: 20px; /* Add space between "Update Profile" and form */
-}
+  margin-top: -30vh;}
 
-.logo-img {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: auto;
-}
+
 
 input[type="text"],
 input[type="number"],

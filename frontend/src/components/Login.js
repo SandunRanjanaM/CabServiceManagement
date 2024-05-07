@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.jpg";
+import "./Login.css";
+import Navbar from "./Navbar";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -43,6 +46,8 @@ export default function Login() {
   
 
   return (
+    <div>
+      <Navbar/>
     <div className="center-container">
       <form onSubmit={handleLogin} className="form-container">
         <div>
@@ -70,6 +75,7 @@ export default function Login() {
         </div>
         <button type="submit" className="submit-button">Login</button>
       </form>
+    </div>
     </div>
   );
 }

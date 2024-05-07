@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import logo from "../images/logo.jpg";
 import jsPDF from "jspdf";
+import Navbar from "./Navbar";
+
 
 export default function UserProfile() {
   const [name, setName] = useState("");
@@ -58,8 +60,11 @@ export default function UserProfile() {
   };
 
   return (
+    <div>
+       <Navbar />
+       
     <div className="center-container">
-      <img src={logo} alt="Logo" className="logo-img" />
+     
       <form className="form-container">
         <div>
           <label htmlFor="nameInput">Name</label>
@@ -128,6 +133,7 @@ export default function UserProfile() {
                 value={licenseYear}
                 readOnly
               />
+
             </div>
           </div>
         )}
@@ -137,6 +143,7 @@ export default function UserProfile() {
         Generate PDF
       </button>
       <Link to={`/update/${id}`} className="update-link">Update Profile</Link>
+    </div>
     </div>
   );
 }
