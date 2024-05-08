@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import _ from "lodash"; // Import lodash
+import { Link } from "react-router-dom"; // Import Link from React Router
 import "./AddCustomer.css"; // Import your CSS file
 import logo from "../images/logo.jpg";
 import "./manageusers.css";
+import { colors } from "@mui/material";
 
 export default function AddCustomer() {
   const [users, setUsers] = useState([]);
@@ -25,6 +27,15 @@ export default function AddCustomer() {
   const filteredUsers = _.filter(users, (user) =>
     user.type.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8070/Customer/delete/${id}`);
+      getUsers(); // Refresh the user list after deletion
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="center-container">
@@ -49,6 +60,7 @@ export default function AddCustomer() {
               <th>Type</th>
               <th>Driving Experience</th>
               <th>License Year</th>
+              <th>Actions</th> {/* New column for buttons */}
             </tr>
           </thead>
           <tbody>
@@ -60,6 +72,10 @@ export default function AddCustomer() {
                 <td>{user.type}</td>
                 <td>{user.type === "Driver" ? user.drivingExperiance : "-"}</td>
                 <td>{user.type === "Driver" ? user.liscenceYear : "-"}</td>
+                <td>
+                  <Link to={`/update/${user._id}`}>Update</Link>
+                  <button className="delete-button"style={{color:"white",backgroundColor:"red"}}  onClick={() => deleteUser(user._id)}>Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
