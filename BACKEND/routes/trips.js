@@ -1,7 +1,7 @@
 const router = require("express").Router();
 let Trip = require("../models/Trip");
 
-router.route("/add").post((req,res)=>{
+router.route("/addTrip").post((req,res)=>{
     const {
         Firstname,
         Lastname,

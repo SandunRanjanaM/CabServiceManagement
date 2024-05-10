@@ -83,7 +83,7 @@ export default  function AddTrip(){
         time: time,
         distance: distance
       }
-      Axios.post("http://localhost:8070/trip/add", newTrip).then(()=>{
+      Axios.post("http://localhost:8070/trip/addTrip", newTrip).then(()=>{
         alert("Trip Added...")
         setFirstName("");
         setLastName("");

@@ -19,18 +19,13 @@ function Header(){
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/homepage" className="nav-link">
-                HomePage
-              </Link>
-            </li>
             <li className="nav-item active">
               <Link className="nav-link" to="/">
                 AllTrips
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/add" className="nav-link">
+              <Link to="/addTrip" className="nav-link">
                 Add trips
               </Link>
             </li>
@@ -44,7 +39,7 @@ function Header(){
                 Register
               </Link>
             </li>
-          </ul>
+                  </ul>
         </div>
       </nav>
     );
