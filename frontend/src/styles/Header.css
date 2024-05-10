@@ -1,0 +1,107 @@
+/* Header/navbar styles */
+:root {
+  --main-color: #d90429;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.navbar-toggler-icon {
+  color: #333;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  color: #333;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #555;
+}
+
+.navbar a {
+  color: red;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: var(--man-color);
+  border-bottom: 3px solid var(--main-color);
+}
+
+.navbar a.active {
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+}
+
+/* Search box */
+.search-box {
+  position: absolute;
+  top: 120%;
+  right: 10%;
+  left: 10%;
+  background: var(--bg-color);
+  box-shadow: 4px 4px 20px rgba(15, 54, 55, 0.1);
+  border: 1px solid var(--main-color);
+  border-radius: 0.5rem;
+
+  
+}
+
+.search-box input {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+}
+
+/* Home section */
+.home {
+  max-width: 1300px;
+  margin: auto;
+  width: 100%;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  background: url(../img/Background-home.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center left;
+}
+
+.home-text {
+  padding-left: 130px;
+}
+
+.home-text h1 {
+  font-size: 2.4rem;
+}
+
+.home-text span {
+  color: var(--main-color);
+}
+
+.home-text p {
+  font-size: 0.938rem;
+  font-weight: 300;
+  margin: 0.5rem 0 1.2rem;
+}
+
+.btn {
+  padding: 10px 22px;
+  background: var(--main-color);
+  color: var(--bg-color);
+  font-weight: 400;
+}
+
+.btn:hover {
+  background: #fd5238;
+}
+

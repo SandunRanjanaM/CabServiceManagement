@@ -1,3 +1,5 @@
+// server.js
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -6,8 +8,7 @@ const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config();
 
-
-const PORT = process.env.PORT || 8070;
+const PORT = process.env.PORT || 8091;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -15,21 +16,23 @@ app.use(bodyParser.json());
 const URL = process.env.MONGODB_URL;
 
 mongoose.connect(URL, {
-
-    //useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
-    //useFindAndModify: false
 });
 
 const connection = mongoose.connection;
 
 connection.once("open", () => {
+    console.log("MongoDB Connection Success!");
+});
 
-    console.log("Mongodb Connection Success!");
-})
+const inventoryRouter = require("./routes/inventory.js");
+const checkoutRouter = require("./routes/checkoutItem.js"); // Import checkout router
+
+// Use inventoryRouter and checkoutRouter
+app.use('/inventory', inventoryRouter);
+app.use('/checkout', checkoutRouter); // Use checkoutRouter here
 
 app.listen(PORT, () => {
-
-    console.log(`Server is up and running on port number : ${PORT}`)
-})
+    console.log(`Server is up and running on port number: ${PORT}`);
+});

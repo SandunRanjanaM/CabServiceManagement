@@ -1,3 +1,24 @@
+/* App.css */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root element */
+:root {
+  /* Define custom properties */
+  --main-color: #d90429;
+  --text-color: #020102;
+  --bg-color: #fff;
+}
+
+/* Additional styles */
 .App {
   text-align: center;
 }
@@ -21,7 +42,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(162, 48, 48);
 }
 
 .App-link {
@@ -36,3 +57,4 @@
     transform: rotate(360deg);
   }
 }
+

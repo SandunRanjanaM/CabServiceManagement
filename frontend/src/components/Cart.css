@@ -1,0 +1,143 @@
+/* Cart.css */
+
+/* General Styles */
+.cart-container {
+    margin: 0 auto; /* Center horizontally */
+    max-width: 600px; /* Limit width */
+    padding: 40px;
+    border: 1px solid #ddd; /* Lighter border color */
+    border-radius: 8px;
+    background-color: #f5f5f5; /* Light gray background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-top: 50px;
+  }
+  
+  .cart-container h2 {
+    font-size: 1.8em; /* Adjust font size slightly */
+    text-align: center;
+    color: #333; /* Darker text color for better contrast */
+    margin-bottom: 20px;
+    margin-left: 2rem;
+  }
+  
+  .cart-container p {
+    font-size: 1em;
+    color: #999; /* Lighter text color for less emphasis */
+    text-align: center;
+    margin-bottom: 10px; /* Add a little space after message */
+  }
+  
+  /* Buttons */
+  .cart-container button {
+    display: inline-block; /* Allow buttons to sit next to text */
+    padding: 12px 20px; /* Adjust padding for a bit more space */
+    background-color: #4CAF50; /* Green color for primary buttons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .cart-container button:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+  }
+  
+  /* "Clear Cart" Button (Optional Customization) */
+  .cart-container button.clear-cart {
+    background-color: #e74c3c; /* Red color for clear cart */
+    color: white;
+  }
+  
+  .cart-container button.clear-cart:hover {
+    background-color: #c0392b; /* Darker red on hover for clear cart */
+  }
+  .cart-container .checkout-btn {
+    display: inline-block; /* Allow button to sit next to text */
+    padding: 12px 20px; /* Adjust padding for a bit more space */
+    background-color: #4CAF50; /* Green color for primary buttons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-top: 20px;
+    
+    margin-left: 285px;
+  }
+  
+  .cart-container .checkout-btn:hover {
+    background-color: #3e8e41; /* Darker green on hover */
+  }
+  
+  
+  /* Cart Item List */
+  .cart-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cart-container li {
+    display: flex; /* Arrange items in a row */
+    justify-content: space-between; /* Distribute items horizontally */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 15px; /* Reduce space slightly between items */
+    border-bottom: 1px solid #eee; /* Add a subtle border for separation */
+    padding-bottom: 10px; /* Add space below border */
+  }
+  
+  .cart-container li:last-child { /* Remove border for last item */
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .cart-container li .item-name {
+    font-weight: bold;
+    flex: 100; /* Allow item name to fill available space */
+    align-items: lest;
+  }
+  
+  .cart-container li .item-price {
+    margin-right: 10px;
+    color: #666; /* Lighter text color for price */
+  }
+  
+
+
+.cart-container li input {
+    width: 40px; /* Adjust width as needed */
+    text-align: center;
+    border: none; /* Remove border */
+    padding: 5px;
+    background-color: transparent; /* Remove background */
+  }
+  
+  .cart-container li button {
+    background-color: #e74c3c; /* Red for remove button */
+    color: white;
+    padding: 8px 12px; /* Adjust padding for smaller button */
+    font-size: 0.9em; /* Slightly smaller font for remove button */
+  }
+  
+  .cart-container li button:hover {
+    background-color: #c0392b; /* Darker red on hover for remove button */
+  }
+  
+  /* Total Section */
+  .cart-container p {
+    margin-top: 20px; /* Add space above total section */
+    border-top: 1px solid #ddd; /* Lighter border for top border */
+    padding-top: 10px; /* Add padding to separate from cart items */
+    text-align: right; /* Align total text to the right */
+    font-size: 1.2em; /* Increase font size for total text */
+    font-weight: bold; /* Make total text bold */
+    color: #333; /* Darker text color for better contrast */
+  }
+  
+  .cart-container .cart-total span {
+    margin-left: 10px; /* Add space between "Total" and amount */
+  }
+  
