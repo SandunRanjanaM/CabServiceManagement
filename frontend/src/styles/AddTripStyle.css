@@ -1,0 +1,87 @@
+.container4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center; /* Center the form vertically */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-width: 400px;
+  width: 40%;
+}
+
+.form{
+ justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+  width: 100%;
+
+}
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-control {
+  width: 150px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+select.form-control {
+  appearance: auto;
+  padding-right: 30px;
+  /*background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l3.72 3.72-3.72 3.72-.72-.72 3-3-3-3z"/></svg>') no-repeat right center / 10px 10px; */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+select.form-control:not([size]):not([multiple]) {
+   height: auto !important;
+}
+
+.new{
+  padding: 0px;
+}
+
+.uButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.vType{
+  width: 150px !important;
+}
+
+.new2{
+  padding: 0px;
+}
+
