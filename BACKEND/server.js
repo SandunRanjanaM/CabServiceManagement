@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 8070;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/uploads", express.static("uploads"));
 
 //================================
 app.use('/dates', dateRouter);
