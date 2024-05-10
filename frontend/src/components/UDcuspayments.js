@@ -15,7 +15,7 @@ export default function UDcuspayments() {
                     throw new Error("User ID not provided");
                 }
 
-                const response = await axios.get(`http://localhost:8070/paymentdetails/get/${id}`);
+                const response = await axios.get(`http://localhost:8070/paymentdetails/getpaydetails/${id}`);
                 setPaymentDetails(response.data.payment);
                 setLoading(false);
             } catch (error) {

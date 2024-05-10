@@ -14,7 +14,7 @@ export default function AllPaymentDetails() {
 
     // fetch
     const getPayments = () => {
-        axios.get("http://localhost:8070/paymentdetails/")
+        axios.get("http://localhost:8070/paymentdetails/allpaydetails")
             .then((res) => {
                 setPayments(res.data);
             })
@@ -30,7 +30,7 @@ export default function AllPaymentDetails() {
 
     // update
     const saveEdit = (id, newData) => {
-        axios.put(`http://localhost:8070/paymentdetails/update/${id}`, newData)
+        axios.put(`http://localhost:8070/paymentdetails/updatepaydetails/${id}`, newData)
             .then(() => {
                 alert("Payment detail updated");
                 setEditedItem(null);
@@ -43,7 +43,7 @@ export default function AllPaymentDetails() {
 
     //delete
     function deleteData(id) {
-        axios.delete(`http://localhost:8070/paymentdetails/delete/${id}`)
+        axios.delete(`http://localhost:8070/paymentdetails/deletepaydetails/${id}`)
             .then(() => {
                 alert("Item deleted");
                 axios.get("http://localhost:8070/paymentdetails")

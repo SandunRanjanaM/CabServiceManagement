@@ -21,8 +21,8 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/payments" element={<Payments />} />
-          <Route path="/add" element={<AddPaymentDetails />} />
-          <Route path="/all" element={<AllPaymentDetails />} />
+          <Route path="/addpaydetails" element={<AddPaymentDetails />} />
+          <Route path="/allpaydetails" element={<AllPaymentDetails />} />
           <Route path="/addreports" element={<AddReports />} />
           <Route path="/allreports" element={<AllPaymentReports />} />
           <Route path="/adddriverpayment" element={<AddDriversPayments />} />

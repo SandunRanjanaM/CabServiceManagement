@@ -36,7 +36,7 @@ const sendData = async (e) => {
     formData.append("document", document); 
     
     try {
-        const response = await axios.post("http://localhost:8070/reports/add", formData, {
+        const response = await axios.post("http://localhost:8070/reports/addpayreports", formData, {
             headers: { "Content-Type": "multipart/form-data" }
         });
         console.log(response);

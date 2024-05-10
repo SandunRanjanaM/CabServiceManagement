@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Create a new payment report
-router.post("/add", upload.single("document"), async (req, res) => {
+router.post("/addpayreports", upload.single("document"), async (req, res) => {
   console.log(req.file); // Change from req.document to req.file
   const { paymentType, department, date } = req.body;
   const documentPath = req.file.path;
@@ -83,7 +83,7 @@ router.get("/download/:id", async (req, res) => {
 
 
 // Read all payment reports
-router.route("/").get((req, res) => {
+router.route("/allpayreports").get((req, res) => {
 
   Reports.find().then((reports) => {
       res.json(reports);
@@ -95,7 +95,7 @@ router.route("/").get((req, res) => {
 });
 
 // Update a payment report
-router.route("/update/:id").put(upload.single("document"), async (req, res) => {
+router.route("/updatepayreports/:id").put(upload.single("document"), async (req, res) => {
   const userId = req.params.id;
   const { paymentType, department, date, time } = req.body;
   const document = req.file ? req.file.path : req.body.document; 
@@ -118,7 +118,7 @@ router.route("/update/:id").put(upload.single("document"), async (req, res) => {
 
 
 //delete
-router.route("/delete/:id").delete(async (req, res) => {
+router.route("/deletepayreports/:id").delete(async (req, res) => {
 
     let userId = req.params.id;
 
@@ -133,7 +133,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 })
 
 //fetch data only one user
-router.route("/get/:id").get(async (req, res) => {
+router.route("/getpayreports/:id").get(async (req, res) => {
     let userId = req.params.id;
 
     const report = await findOne(userId).then((repDetail) => {

@@ -10,8 +10,8 @@ function Payments() {
             <p class="h1">Manage Payments</p>
             <hr></hr>
             <div className="d-grid gap-2 col-6 mx-auto" >
-            <Link to="/add" className="btn btn-secondary">Add Payment Details</Link>
-            <Link to="/all" className="btn btn-secondary">All Payment Details</Link>
+            <Link to="/addpaydetails" className="btn btn-secondary">Add Payment Details</Link>
+            <Link to="/allpaydetails" className="btn btn-secondary">All Payment Details</Link>
             <Link to="/adddriverpayment" className="btn btn-secondary">Calculate Driver Payments</Link>
             <Link to="/alldriverpayments" className="btn btn-secondary">All Driver Payments</Link>
             </div>

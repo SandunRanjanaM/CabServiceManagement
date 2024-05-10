@@ -2,7 +2,7 @@ const router = require("express").Router();
 let paymentDetails = require("../models/paymentdetails");
 
 //create 
-router.route("/add").post((req,res)=>{
+router.route("/addpaydetails").post((req,res)=>{
 
     const name = req.body.name;
     const date = Date(req.body.date);
@@ -29,7 +29,7 @@ router.route("/add").post((req,res)=>{
 })
 
 //read,get,fetch all data
-router.route("/").get((req,res)=>{
+router.route("/allpaydetails").get((req,res)=>{
 
     paymentDetails.find().then((paymentdetails)=>{
         res.json(paymentdetails)
@@ -40,7 +40,7 @@ router.route("/").get((req,res)=>{
 })
 
 //update
-router.route("/update/:id").put(async (req, res) => {
+router.route("/updatepaydetails/:id").put(async (req, res) => {
      
     let userId = req.params.id;
     const { paymentType, amount, paymentDescription} = req.body;
@@ -64,7 +64,7 @@ router.route("/update/:id").put(async (req, res) => {
 }) 
 
 //delete
-router.route("/delete/:id").delete(async (req,res) => {
+router.route("/deletepaydetails/:id").delete(async (req,res) => {
 
     let userId = req.params.id;
 
@@ -78,7 +78,7 @@ router.route("/delete/:id").delete(async (req,res) => {
 })
 
 //fetch data only one user
-router.route("/get/:id").get(async (req, res) => {
+router.route("/getpaydetails/:id").get(async (req, res) => {
     try {
         let userId = req.params.id;
         const payment = await paymentDetails.findById(userId);

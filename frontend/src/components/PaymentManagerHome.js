@@ -27,7 +27,7 @@ export default function PaymentManagerHome() {
                         <div className="card-body">
                             <h5 className="card-title">Manage Payment Details</h5>
                             <p className="card-text">View, edit, and process payments.</p>
-                            <Link to="/all" className="btn btn-outline-primary">Go to Payment Details</Link>
+                            <Link to="/allpaydetails" className="btn btn-outline-primary">Go to Payment Details</Link>
                         </div>
                     </div>
                 </div>

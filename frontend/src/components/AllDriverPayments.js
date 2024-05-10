@@ -24,7 +24,7 @@ export default function AllDriverPayments() {
     
     // Fetch
     const getDriverpayments = () => {
-        axios.get("http://localhost:8070/driverpayments/")
+        axios.get("http://localhost:8070/driverpayments/alldriverpay")
             .then((res) => {
                 setDriverpayments(res.data);
                 calculateTotals(res.data);
@@ -53,7 +53,7 @@ export default function AllDriverPayments() {
 
     // Update
     const saveEdit = (id, newData) => {
-        axios.put(`http://localhost:8070/driverpayments/update/${id}`, newData)
+        axios.put(`http://localhost:8070/driverpayments/updatedriverpay/${id}`, newData)
             .then(() => {
                 alert("Driver payment updated");
                 setEditedItem(null); 
@@ -66,7 +66,7 @@ export default function AllDriverPayments() {
 
     //Delete
     function deleteData(id) {
-        axios.delete(`http://localhost:8070/driverpayments/delete/${id}`)
+        axios.delete(`http://localhost:8070/driverpayments/deletedriverpay/${id}`)
             .then(() => {
                 alert("Item deleted");
                 axios.get("http://localhost:8070/driverpayments")

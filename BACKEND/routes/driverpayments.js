@@ -2,7 +2,7 @@ const router = require("express").Router();
 let driverPayments = require("../models/driverpayments");
 
 //create
-router.route("/add").post((req, res) => {
+router.route("/adddriverpay").post((req, res) => {
     
     const name = req.body.name;
     const email = req.body.email;
@@ -31,7 +31,7 @@ router.route("/add").post((req, res) => {
 })
 
 //read
-router.route("/").get((req, res) => {
+router.route("/alldriverpay").get((req, res) => {
 
     driverPayments.find().then((driverpayments) => {
         res.json(driverpayments)
@@ -44,7 +44,7 @@ router.route("/").get((req, res) => {
 })
 
 //update
-router.route("/update/:id").put(async (req, res) => {
+router.route("/updatedriverpay/:id").put(async (req, res) => {
 
     let userId = req.params.id;
     const {name, email, date, amount, companycommission, finalsalary} = req.body;
@@ -70,7 +70,7 @@ router.route("/update/:id").put(async (req, res) => {
 })
 
 //delete
-router.route("/delete/:id").delete(async (req, res) => {
+router.route("/deletedriverpay/:id").delete(async (req, res) => {
 
     let userId = req.params.id;
 
@@ -86,7 +86,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 })
 
 //fetch
-router.route("/get/:id").get(async (req, res) => {
+router.route("/getdriverpay/:id").get(async (req, res) => {
 
     let userId = req.params.id;
 

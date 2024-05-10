@@ -38,7 +38,7 @@ export default function AddPaymentDetails() {
             paymentDescription
         }
 
-        axios.post("http://localhost:8070/paymentdetails/add", newPayment).then(() => {
+        axios.post("http://localhost:8070/paymentdetails/addpaydetails", newPayment).then(() => {
             alert("Payment Detail Added Successfully")
             
             setName("");

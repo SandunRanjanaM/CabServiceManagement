@@ -59,7 +59,7 @@ export default function AddDriversPayments() {
             finalsalary
         }
 
-        axios.post("http://localhost:8070/driverpayments/add", newDriverpayment).then(() => {
+        axios.post("http://localhost:8070/driverpayments/adddriverpay", newDriverpayment).then(() => {
             alert("Driver Payment Added Successfully")
 
             setName("");

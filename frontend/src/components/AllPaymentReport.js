@@ -19,7 +19,7 @@ export default function AllPaymentReports() {
     }, []);
 
     const getPdf = async() => {
-        const result = await axios.get("http://localhost:8070/reports/");
+        const result = await axios.get("http://localhost:8070/reports/allpayreports");
         console.log(result.data.data);
         setAllImage(result.data.data);
     };
@@ -31,7 +31,7 @@ export default function AllPaymentReports() {
 
     //fetch
     const getReports = () => {
-        axios.get("http://localhost:8070/reports/")
+        axios.get("http://localhost:8070/reports/allpayreports")
             .then((res) => {
                 setReports(res.data);
                 getPdf()
@@ -80,7 +80,7 @@ export default function AllPaymentReports() {
         formData.append("date", newData.date);
         formData.append("document", file || newData.document); 
         
-        axios.put(`http://localhost:8070/reports/update/${id}`, formData)
+        axios.put(`http://localhost:8070/reports/updatepayreports/${id}`, formData)
           .then(() => {
             alert("Payment report updated");
             setEditedItem(null); 
@@ -95,7 +95,7 @@ export default function AllPaymentReports() {
 
     // delete
     function deleteData(id) {
-        axios.delete(`http://localhost:8070/reports/delete/${id}`)
+        axios.delete(`http://localhost:8070/reports/deletepayreports/${id}`)
             .then(() => {
                 alert("Item deleted");
                 
