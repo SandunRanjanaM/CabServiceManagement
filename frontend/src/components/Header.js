@@ -19,6 +19,11 @@ function Header() {
       <li className="nav-item">
         <a className="nav-link" href="/select" aria-disabled="true">Package Counts</a>
       </li>
+
+      <li className="nav-item">
+        <a className="nav-link" href="/uploads" aria-disabled="true">Recipts</a>
+      </li>
+      
     </ul>
 
 
