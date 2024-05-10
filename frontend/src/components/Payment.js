@@ -13,7 +13,7 @@ export default function Payment() {
       try {
         const response = await Axios.get(`http://localhost:8070/trip/get/${id}`); // Fetch trip details using ID
         console.log('Trip details:', response.data);
-        setTrip(response.data); // Set trip details in state
+        setTrip(response.data.trip); // Set trip details in state
         setLoading(false); // Update loading status
       } catch (error) {
         console.error('Error fetching trip details:', error);
@@ -31,7 +31,7 @@ export default function Payment() {
     return null;
   }
 
-  const {FirstName, Destination, Address, VehicleType, distance} = trip;
+  const {Firstname, Destination, Address, VehicleType, distance} = trip;
 
   let ratePerKm = 0;
   if (VehicleType === "Car") {
@@ -49,7 +49,7 @@ export default function Payment() {
           <h5 className="card-title mb-0">Trip Details</h5>
         </div>
         <div className="card-body">
-          <p className="card-text">First Name: {FirstName}</p>
+          <p className="card-text">First Name: {Firstname}</p>
           <p className="card-text">Destination: {Destination}</p>
           <p className="card-text">Address: {Address}</p>
           <p className="card-text">Vehicle Type: {VehicleType}</p>

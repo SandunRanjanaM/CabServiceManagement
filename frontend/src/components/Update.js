@@ -7,14 +7,14 @@ function Update() {
   const{id}=useParams();
   const location = useLocation();
   const [values,setValues]=useState({
-    fname:'',
-    lname:'',
-    address:'',
-    contactno:'',
-    destination:'',
-    vplaces:'',
-    passengers:'1',
-    vehicletype:'',
+    Firstname:'',
+    Lastname:'',
+    Address:'',
+    ContactNo:'',
+    Destination:'',
+    VisitingPlaces:'',
+    NumberOfPassengers:'1',
+    VehicleType:'',
     date:'',
     time:'',
     distance:''
@@ -31,14 +31,14 @@ function Update() {
         }
         setValues(prevValues => ({
           ...prevValues,
-          fname: tripData.Firstname ,
-          lname: tripData.Lastname ,
-          address: tripData.Address ,
-          contactno: tripData.ContactNo ,
-          destination: tripData.Destination ,
-          vplaces: tripData.VisitingPlaces ,
-          passengers: tripData.NumberOfPassengers ,
-          vehicletype: tripData.VehicleType ,
+          Firstname: tripData.Firstname ,
+          Lastname: tripData.Lastname ,
+          Address: tripData.Address ,
+          ContactNo: tripData.ContactNo ,
+          Destination: tripData.Destination ,
+          VisitingPlaces: tripData.VisitingPlaces ,
+          NumberOfPassengers: tripData.NumberOfPassengers ,
+          VehicleType: tripData.VehicleType ,
           date: tripData.date ,
           time: tripData.time ,
           distance: tripData.distance,
@@ -57,7 +57,6 @@ const handleUpdate=async()=>{
     await Axios.put(`http://localhost:8070/trip/update/${id}`, values);
     window.location.href='/';
   }catch(error){
-    throw(new Error(error));
     console.log(error)
   }
 }
@@ -66,15 +65,16 @@ const handleUpdate=async()=>{
     <form className='form'>
     <div className="container4">
           <div className="form-group">
-            <label htmlFor="fname">First Name</label>
+            <label htmlFor="Firstname">First Name</label>
             <input
-              type="text"
-              className="form-control"
-              id="fname"
-              placeholder="Enter customer firstname"
-              value={values.fname}
-              onChange={(e) => setValues({...values, fname: e.target.value})}
-            />
+                type="text"
+                className="form-control"
+                id="fname"
+                placeholder="Enter customer firstname"
+                 value={values.Firstname}
+            onChange={(e) => setValues({...values, Firstname: e.target.value})}
+          />
+  
           </div>
           <div className="form-group">
             <label htmlFor="lname">Last Name</label>
@@ -83,12 +83,9 @@ const handleUpdate=async()=>{
               className="form-control"
               id="lname"
               placeholder="Enter customer lastname"
-              value={values.lname}
-              onChange={(e) => setValues({...values, lname: e.target.value})}
-
-
-             
-            />
+              value={values.Lastname}
+              onChange={(e) => setValues({...values, Lastname: e.target.value})}
+          />
           </div>
           <div className="form-group">
             <label htmlFor="address">Address</label>
@@ -97,8 +94,8 @@ const handleUpdate=async()=>{
               className="form-control"
               id="address"
               placeholder="Enter customer address"
-              value={values.address}
-              onChange={(e) => setValues({...values, address: e.target.value})}
+              value={values.Address}
+              onChange={(e) => setValues({...values, Address: e.target.value})}
 
             />
 
@@ -110,8 +107,8 @@ const handleUpdate=async()=>{
               className="form-control"
               id="contactno"
               placeholder="Enter contact number"
-              value={values.contactno}
-              onChange={(e) => setValues({...values, contactno: e.target.value})}
+              value={values.ContactNo}
+              onChange={(e) => setValues({...values, ContactNo: e.target.value})}
 
 
             />
@@ -124,8 +121,8 @@ const handleUpdate=async()=>{
               className="form-control"
               id="destination"
               placeholder="Enter the destination"
-              value={values.destination}
-              onChange={(e) => setValues({...values, destination: e.target.value})}
+              value={values.Destination}
+              onChange={(e) => setValues({...values, Destination: e.target.value})}
 
             />
 
@@ -137,8 +134,8 @@ const handleUpdate=async()=>{
               className="form-control"
               id="vplaces"
               placeholder="Enter visiting places"
-              value={values.vplaces}
-              onChange={(e) => setValues({...values, vplaces: e.target.value})}
+              value={values.VisitingPlaces}
+              onChange={(e) => setValues({...values, VisitingPlaces: e.target.value})}
 
             />
           </div>
@@ -147,8 +144,8 @@ const handleUpdate=async()=>{
             <select
               className="form-control"
               id="passengers"
-              value={values.passengers}      
-              onChange={(e) => setValues({...values, passengers: e.target.value})}
+              value={values.NumberOfPassengers}      
+              onChange={(e) => setValues({...values, NumberOfPassengers: e.target.value})}
 
           >
               <option value="1">1</option>
@@ -179,8 +176,8 @@ const handleUpdate=async()=>{
             <select
               id="inputVehicleType"
               className="form-control"
-              value={values.vehicletype}        
-              onChange={(e) => setValues({...values, vehicletype: e.target.value})}
+              value={values.VehicleType}        
+              onChange={(e) => setValues({...values, VehicleType: e.target.value})}
       
             >
               <option value="">Choose...</option>
@@ -197,10 +194,10 @@ const handleUpdate=async()=>{
             <label htmlFor="date"> Date</label>
             <input
               type="date"
-              value={values.date}
               className="form-control"
               id="dataepicker"
               placeholder="Select Date"
+              value={values.date}
               onChange={(e) => setValues({...values, date: e.target.value})}
 
               />
