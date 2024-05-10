@@ -46,7 +46,7 @@ export default function AddPaymentDetails() {
             setPaymentType("");
             setAmount("");
             setPaymentDescription("");
-            
+            window.location.href="/udcuspayments/${id}"
 
 
         }).catch((err) => {

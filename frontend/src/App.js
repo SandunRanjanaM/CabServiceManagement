@@ -19,6 +19,7 @@ function App() {
     <Router>
       <div>
         <Header/>
+        
         <Routes>
           <Route path="/payments" element={<Payments />} />
           <Route path="/addpaydetails" element={<AddPaymentDetails />} />
@@ -27,6 +28,7 @@ function App() {
           <Route path="/allreports" element={<AllPaymentReports />} />
           <Route path="/adddriverpayment" element={<AddDriversPayments />} />
           <Route path="/home" element={<PaymentManagerHome />} />
+          <Route path="/" element={<PaymentManagerHome />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/alldriverpayments" element={<AllDriverPayments />} />
           <Route path="/udcuspayments/:id" element={<UDcuspayments />} />
