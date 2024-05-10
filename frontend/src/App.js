@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import Header from './components/Header';
 import AddTrip from './components/AddTrip';
 import AllTrips from './components/AllTrips';
-import Login from './components/Login';
-import Register from './components/Register';
 import Payment from './components/Payment';
 import Report from './components/Report';
 import { useSelector } from 'react-redux';
@@ -29,8 +27,6 @@ function App() {
           <Routes>
             <Route path="/" element={<AllTrips />} />
             <Route path="/addTrip" element={<AddTrip />} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />          
             <Route path="/payment/:id" element={<Payment/>} />
             <Route path="/report" element={<Report/>} />
             <Route path="/update/:id" element={<Update />} />

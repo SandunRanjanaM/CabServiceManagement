@@ -29,16 +29,6 @@ function Header(){
                 Add trips
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/register" className="nav-link">
-                Register
-              </Link>
-            </li>
                   </ul>
         </div>
       </nav>
