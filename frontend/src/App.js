@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header/>
+        
         
         <Routes>
           <Route path="/payments" element={<Payments />} />

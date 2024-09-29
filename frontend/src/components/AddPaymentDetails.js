@@ -43,7 +43,7 @@ export default function AddPaymentDetails() {
                 setDate("");
                 setPaymentType("");
                 setAmount("");
-                setPaymentDescription("");
+                setPaymentDescription(""); 
                 navigate(`/udcuspayments/${response.data.userId}`);
  
             })
