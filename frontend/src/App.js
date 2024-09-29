@@ -7,19 +7,16 @@ import Login from './components/login';
 import AdminHome from './components/AdminHome';
 import AddSalary from './components/AddSalary';
 import AllSalaries from './components/AllSalaries';
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Removed Navigate
 import Analysis from './components/Analysis';
-
 import AddPackage from './components/AddPackage';
 import CabEditForm from './components/UpdatePackage/CabEditForm';
 import CabTable from './components/UpdatePackage/CabTable';
-// import Header from './components/Header';
 import ViewForm from './components/ViewForm';
 import PackageCounts from './components/PackageCounts';
 import UploadedImagesPage from './components/UploadedImagesPage';
 import UploadForm from './components/UploadForm';
 import ImageGallery from './components/ImageGallery';
- // Import the new component
 
 function App() {
   // Initialize isLoggedIn state with the value from localStorage or false if not present
@@ -43,7 +40,7 @@ function App() {
     if (storedLoggedIn !== isLoggedIn) {
       setIsLoggedIn(storedLoggedIn);
     }
-  }, []);
+  }, [isLoggedIn]); // Added isLoggedIn as a dependency
 
   return (
     <Router>
@@ -52,7 +49,7 @@ function App() {
         
         {isLoggedIn && (
           <>
-            <Header />
+            <Header onLogout={handleLogout} /> {/* If logout is needed, pass this to Header */}
             <Routes>
               <Route path="/" element={<AdminHome />} />
               <Route path="/add" element={<Addsystemusers />} />
@@ -60,7 +57,6 @@ function App() {
               <Route path="/salary/add" element={<AddSalary/>}/>
               <Route path="/salary/update" element={<AllSalaries/>}/>
               <Route path="/analytics" element={<Analysis/>}/>
-
               <Route path="/addpackage" element={<AddPackage />} />
               <Route path="/home" element={<CabTable />} />
               <Route path="/edit/:id" element={<CabEditForm />} />
@@ -70,14 +66,11 @@ function App() {
               <Route path="/uploaded-images" element={<UploadedImagesPage/>} />
               <Route path="/form" element={<UploadForm/>} />
               <Route path="/uploads" element={<ImageGallery/>} />
-      
             </Routes>
-            
           </>
         )}
       </div>
-      </Router>
-    
+    </Router>
   );
 }
 

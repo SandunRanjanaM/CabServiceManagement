@@ -20,6 +20,7 @@ const AllSalaries = () => {
             });
     }, []);
 
+
     function updateSalary(id, updatedSalaryData) {
         axios.put(`http://localhost:8070/salary/update/${id}`, updatedSalaryData)
             .then(() => {
