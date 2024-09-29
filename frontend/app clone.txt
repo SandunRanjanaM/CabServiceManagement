@@ -1,0 +1,37 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [startDate, setStartDate] = useState('');
+  const [timePeriod, setTimePeriod] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  const handleCalculateEndDate = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/calculateEndDate', { startDate, timePeriod });
+      setEndDate(response.data.endDate);
+    } catch (error) {
+      console.error('Error calculating end date:', error);
+    }
+  };
+
+  return (
+    <div className="App">
+      <label>
+        Start Date:
+        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Time Period (in months):
+        <input type="number" value={timePeriod} onChange={(e) => setTimePeriod(e.target.value)} />
+      </label>
+      <br />
+      <button onClick={handleCalculateEndDate}>Calculate End Date</button>
+      <br />
+      {endDate && <p>End Date: {endDate}</p>}
+    </div>
+  );
+}
+
+export default App;

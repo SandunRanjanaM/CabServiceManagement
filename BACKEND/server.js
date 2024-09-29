@@ -4,13 +4,20 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const app = express();
+const uploadRoute = require("./routes/uploadRoute.js")
 require("dotenv").config();
+//======================================
+const dateRouter = require('./routes/dateRouter.js');
 
 
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/uploads", express.static("uploads"));
+
+//================================
+app.use('/dates', dateRouter);
 
 const URL = process.env.MONGODB_URL;
 
@@ -38,8 +45,15 @@ const salaryRouter = require("./routes/salary.js");
 app.use("/salary",salaryRouter);
 
 
+const cabRouter = require("./routes/cab.js");
+
+
+app.use("/cab",cabRouter);
+app.use("/uploads", uploadRoute);
 
 app.listen(PORT, () => {
 
     console.log(`Server is up and running on port number : ${PORT}`)
 })
+
+
